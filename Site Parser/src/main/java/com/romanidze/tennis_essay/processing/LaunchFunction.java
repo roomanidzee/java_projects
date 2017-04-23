@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +18,8 @@ import org.jsoup.nodes.Document;
  */
 public class LaunchFunction {
     
+    private final Path FILEPATH = Paths.get("src/main/resources/app.properties");
+    
     public void launch(){
         
         Document doc = null;
@@ -24,7 +28,7 @@ public class LaunchFunction {
         
         try {
             
-            Reader isr = new InputStreamReader(new FileInputStream("src\\main\\resources\\app.properties"));
+            Reader isr = new InputStreamReader(new FileInputStream(this.FILEPATH.toFile()));
             
             p.load(isr);
             

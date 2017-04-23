@@ -17,7 +17,7 @@ public class ParseImplementation implements ParseInterface{
         
         String temp = data.toString();
         
-        String temp1 = temp.replaceAll("<a href=\\\"[^\\\"]([^>]+)>| </a>", " ");
+        String temp1 = temp.replaceAll("<a href=\\\"[^\\\"]([^>]+)>| ", " ");
         
         String temp2 = temp1.replaceAll("</a>", " ");
         

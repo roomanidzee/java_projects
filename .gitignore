@@ -1,5 +1,4 @@
 *.class
-*.properties
 target/
 
 # Mobile Tools for Java (J2ME)
