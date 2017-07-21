@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<results>
+	<day id="0">
+		<minTemperature>12.01 °C</minTemperature>
+		<maxTemperature>17.0 °C</maxTemperature>
+		<dateTime>Fri Jul 21 11:00:00 MSK 2017</dateTime>
+	</day>
+	<day id="1">
+		<minTemperature>14.39 °C</minTemperature>
+		<maxTemperature>21.32 °C</maxTemperature>
+		<dateTime>Sat Jul 22 11:00:00 MSK 2017</dateTime>
+	</day>
+	<day id="2">
+		<minTemperature>15.7 °C</minTemperature>
+		<maxTemperature>21.06 °C</maxTemperature>
+		<dateTime>Sun Jul 23 11:00:00 MSK 2017</dateTime>
+	</day>
+</results>
