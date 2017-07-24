@@ -8,12 +8,12 @@ import java.util.Objects;
  */
 public class WeatherRequest {
     
-    private String city;
-    private String country;
-    private float minTemperature;
+    private String city;//город в запросе пользователя
+    private String country;//страна в запросе пользователя
+    private float minTemperature;//минимальная и максимальные температуры
     private float maxTemperature;
-    private String dateTime;
-    private byte forecastDays;
+    private String dateTime;//дата прогноза
+    private byte forecastDays;//Количество дней для прогноза
     
     private WeatherRequest(){}
     
@@ -142,8 +142,8 @@ public class WeatherRequest {
     public String toString(){
         
        return "WeatherRequest{city = " + this.getCity() + ", country = " + this.getCountry() 
-               + ", minTemperature = " + this.getMinTemperature() + ", maxTemperature = " + this.getMaxTemperature()
-               + ", dateTime = " + this.getDateTime() + ", forecasrDays = " + this.getForecastDays() + "}";
+               + ", minTemperature = " + this.getMinTemperature() + "°C, maxTemperature = " + this.getMaxTemperature()
+               + "°C, dateTime = " + this.getDateTime() + ", forecasrDays = " + this.getForecastDays() + "}";
         
     }
 }

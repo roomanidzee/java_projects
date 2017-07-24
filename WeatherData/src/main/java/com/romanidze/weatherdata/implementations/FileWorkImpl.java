@@ -47,32 +47,32 @@ public class FileWorkImpl implements FileWorkInterface{
             
             Document document = DocumentBuilderFactory.newInstance()
                                                       .newDocumentBuilder()
-                                                      .newDocument();
-            
-//            Element country = document.createElement("country");
-//            country.setTextContent(weatherRequests.get(0).getCountry());
-//            document.appendChild(country);
+                                                      .newDocument();        
             
             Element results = document.createElement("results");
             document.appendChild(results);
             
+            Element country = document.createElement("country");
+            country.setTextContent(weatherRequests.get(0).getCountry());
+            results.appendChild(country);
+            
             for(int i = 0; i < weatherRequests.size(); i++){
                 
-                Element day = document.createElement("day");
-                day.setAttribute("id", Integer.toString(weatherRequests.get(i).getForecastDays()));
-                results.appendChild(day);
+                Element requestNumber = document.createElement("request_number");
+                requestNumber.setAttribute("id", Integer.toString(weatherRequests.get(i).getForecastDays()));
+                results.appendChild(requestNumber);
                 
                 Element minTemperature = document.createElement("minTemperature");
-                minTemperature.setTextContent(Float.toString(weatherRequests.get(i).getMinTemperature()) + " °C");
-                day.appendChild(minTemperature);
+                minTemperature.setTextContent(Float.toString(weatherRequests.get(i).getMinTemperature()) + "°C");
+                requestNumber.appendChild(minTemperature);
                 
                 Element maxTemperature = document.createElement("maxTemperature");
-                maxTemperature.setTextContent(Float.toString(weatherRequests.get(i).getMaxTemperature()) + " °C");
-                day.appendChild(maxTemperature);
+                maxTemperature.setTextContent(Float.toString(weatherRequests.get(i).getMaxTemperature()) + "°C");
+                requestNumber.appendChild(maxTemperature);
                 
                 Element dateTime = document.createElement("dateTime");
                 dateTime.setTextContent(weatherRequests.get(i).getDateTime());
-                day.appendChild(dateTime);
+                requestNumber.appendChild(dateTime);
                 
             }
             

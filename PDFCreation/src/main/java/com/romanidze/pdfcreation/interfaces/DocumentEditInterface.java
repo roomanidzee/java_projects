@@ -9,8 +9,8 @@ import com.itextpdf.text.Section;
  */
 public interface DocumentEditInterface {
     
-    void addTitlePage(Document document);
-    void addContent(Document document);
-    void createTable(Section section);
+    void addTitlePage(Document document);//добавление титульника
+    void addContent(Document document);//добавление содержимого страницы
+    void createTable(Section section);//создание таблицы на странице
     
 }

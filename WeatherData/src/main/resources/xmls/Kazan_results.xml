@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <results>
-	<day id="0">
-		<minTemperature>12.01 °C</minTemperature>
-		<maxTemperature>17.0 °C</maxTemperature>
-		<dateTime>Fri Jul 21 11:00:00 MSK 2017</dateTime>
-	</day>
-	<day id="1">
-		<minTemperature>14.39 °C</minTemperature>
-		<maxTemperature>21.32 °C</maxTemperature>
-		<dateTime>Sat Jul 22 11:00:00 MSK 2017</dateTime>
-	</day>
-	<day id="2">
-		<minTemperature>15.7 °C</minTemperature>
-		<maxTemperature>21.06 °C</maxTemperature>
-		<dateTime>Sun Jul 23 11:00:00 MSK 2017</dateTime>
-	</day>
+	<country>RU</country>
+	<request_number id="1">
+		<minTemperature>15.0°C</minTemperature>
+		<maxTemperature>19.65°C</maxTemperature>
+		<dateTime>Mon Jul 24 11:00:00 MSK 2017</dateTime>
+	</request_number>
+	<request_number id="2">
+		<minTemperature>16.34°C</minTemperature>
+		<maxTemperature>22.24°C</maxTemperature>
+		<dateTime>Tue Jul 25 11:00:00 MSK 2017</dateTime>
+	</request_number>
+	<request_number id="3">
+		<minTemperature>15.32°C</minTemperature>
+		<maxTemperature>23.17°C</maxTemperature>
+		<dateTime>Wed Jul 26 11:00:00 MSK 2017</dateTime>
+	</request_number>
+	<request_number id="4">
+		<minTemperature>15.12°C</minTemperature>
+		<maxTemperature>21.91°C</maxTemperature>
+		<dateTime>Thu Jul 27 11:00:00 MSK 2017</dateTime>
+	</request_number>
+	<request_number id="5">
+		<minTemperature>14.02°C</minTemperature>
+		<maxTemperature>25.18°C</maxTemperature>
+		<dateTime>Fri Jul 28 11:00:00 MSK 2017</dateTime>
+	</request_number>
 </results>

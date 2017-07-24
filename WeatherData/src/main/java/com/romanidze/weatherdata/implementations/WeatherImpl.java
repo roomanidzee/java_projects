@@ -65,6 +65,8 @@ public class WeatherImpl implements WeatherInterface{
         
         OpenWeatherMap owm = new OpenWeatherMap(units, owmAPIKey);
         
+        int requestCounter = 1;
+        
         try{
             
             DailyForecast forecast = owm.dailyForecastByCityName(userRequest.toString(), forecastDays);
@@ -84,11 +86,13 @@ public class WeatherImpl implements WeatherInterface{
                 wrb.setMinTemperature(temperature.getMinimumTemperature());
                 wrb.setMaxTemperature(temperature.getMaximumTemperature());
                 wrb.setDateTime(dayForecast.getDateTime().toString());
-                wrb.setForecastDays((byte) i);
+                wrb.setForecastDays((byte) requestCounter);
                 
                 wr = wrb.build();
                 
                 resultList.add(wr);
+                
+                requestCounter++;
             }
             
         }catch(IOException | JSONException e){

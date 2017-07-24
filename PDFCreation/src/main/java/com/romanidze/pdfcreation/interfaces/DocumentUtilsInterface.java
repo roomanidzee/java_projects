@@ -11,8 +11,8 @@ import java.util.Map;
  */
 public interface DocumentUtilsInterface {
     
-    void addEmptyLine(Paragraph paragraph, int number);
-    void getInfo(Map<String, String> songMap, List<Double> durationList);
-    void addMetaData(Document document);
+    void addEmptyLine(Paragraph paragraph, int number);//добавление отступов
+    void getInfo(Map<String, String> songMap, List<Double> durationList);//получение информации от пользователя
+    void addMetaData(Document document);//добавление мета - свойств
     
 }
