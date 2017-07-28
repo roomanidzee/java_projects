@@ -1,2 +1,2 @@
 # java_projects
-In this repository I keep my java projects.
+В данном репозитории хранятся все проекты, созданные мной на языке Java
