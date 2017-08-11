@@ -74,6 +74,10 @@ public class GithubAPIImpl implements GithubAPIInterface{
             
         }
         
+        //API Github возвращает json, который начинается с [,
+        //соответственно, такой json не обрабатывается, и поэтому
+        //необходимо его редактировать
+        
         StringBuilder result = new StringBuilder();
         result.append("{")
               .append("\"repos\":")
