@@ -8,6 +8,6 @@ import org.jsoup.nodes.Document;
  */
 public interface ParseInterface {
     
-     String getAllTitles(Document doc);
+     String getAllTitles(Document doc);//парсинг всех названий песен
     
 }
