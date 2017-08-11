@@ -26,6 +26,10 @@ public class LaunchFunction {
         
         String username = sc.nextLine();
         
+        //Неизвестно почему, но maven опережает вывод в консоли
+        //обычного System.out, и не выводит его, поэтому я заменил его
+        //на System.err
+        
         System.err.println();
         System.err.println();
         
