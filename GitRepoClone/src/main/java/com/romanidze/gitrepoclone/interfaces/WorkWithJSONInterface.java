@@ -10,7 +10,8 @@ import org.json.simple.JSONObject;
  */
 public interface WorkWithJSONInterface {
     
-    Map<String, String> getCloneRepos(JSONObject jsonString);
-    boolean cloneRepoToFolder(Path pathToFolder, String cloneURL);
+    Map<String, String> getCloneRepos(JSONObject jsonString);//получение списка репозиториев
+    boolean cloneRepoToFolder(Path pathToFolder, String cloneURL);//копирование определенного репозитория
+                                                                  //на компьютер
     
 }
