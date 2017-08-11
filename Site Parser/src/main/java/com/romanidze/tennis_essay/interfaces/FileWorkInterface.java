@@ -6,6 +6,6 @@ package com.romanidze.tennis_essay.interfaces;
  */
 public interface FileWorkInterface {
     
-    void saveData(String dataToFile);
+    void saveData(String dataToFile); //сохранение данных в файл
     
 }
