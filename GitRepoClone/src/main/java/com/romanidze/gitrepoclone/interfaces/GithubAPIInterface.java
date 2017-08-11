@@ -6,7 +6,7 @@ package com.romanidze.gitrepoclone.interfaces;
  */
 public interface GithubAPIInterface {
     
-    String buildRequestURL(String username);
-    String makeGETRequest(String requestURL);
+    String buildRequestURL(String username);//создание ссылки для запроса
+    String makeGETRequest(String requestURL);//отправка запроса на созданную ссылку
     
 }
