@@ -1,6 +1,6 @@
-package com.romanidze.tennis_essay.launcher;
+package com.romanidze.data_scraper.launcher;
 
-import com.romanidze.tennis_essay.processing.LaunchFunction;
+import com.romanidze.data_scraper.processing.LaunchFunction;
 
 /**
  *
