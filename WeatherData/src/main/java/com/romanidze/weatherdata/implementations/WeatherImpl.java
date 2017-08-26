@@ -1,7 +1,6 @@
 package com.romanidze.weatherdata.implementations;
 
 import com.romanidze.weatherdata.entities.WeatherRequest;
-import com.romanidze.weatherdata.entities.WeatherRequestBuilder;
 import com.romanidze.weatherdata.interfaces.WeatherInterface;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class WeatherImpl implements WeatherInterface{
         
         try{
             
-            filePath = Paths.get("src/main/resources/app.properties").toRealPath();
+            filePath = Paths.get("app.properties").toRealPath();
             fis = new FileInputStream(filePath.toFile());
             
             prop.load(fis);           
@@ -77,18 +76,15 @@ public class WeatherImpl implements WeatherInterface{
                 
                 Forecast dayForecast = forecast.getForecastInstance(i);
                 Forecast.Temperature temperature = dayForecast.getTemperatureInstance();
-                WeatherRequestBuilder wrb = new WeatherRequestBuilder();
                 
-                WeatherRequest wr;
-                
-                wrb.setCity(city);
-                wrb.setCountry(country);
-                wrb.setMinTemperature(temperature.getMinimumTemperature());
-                wrb.setMaxTemperature(temperature.getMaximumTemperature());
-                wrb.setDateTime(dayForecast.getDateTime().toString());
-                wrb.setForecastDays((byte) requestCounter);
-                
-                wr = wrb.build();
+                WeatherRequest wr = WeatherRequest.newBuilder()
+                                                  .setCity(city)
+                                                  .setCountry(country)
+                                                  .setMinTemperature(temperature.getMinimumTemperature())
+                                                  .setMaxTemperature(temperature.getMaximumTemperature())
+                                                  .setDateTime(dayForecast.getDateTime().toString())
+                                                  .setForecastDays((byte) requestCounter)
+                                                  .build();
                 
                 resultList.add(wr);
                 

@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface FileWorkInterface {
     
-    void saveToXML(List<WeatherRequest> weatherRequests);//метод для сохранения данных в xml-файл
+    void saveToXML(List<WeatherRequest> weatherRequests);
     
 }

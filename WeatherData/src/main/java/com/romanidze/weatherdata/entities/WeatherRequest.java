@@ -8,31 +8,14 @@ import java.util.Objects;
  */
 public class WeatherRequest {
     
-    private String city;//город в запросе пользователя
-    private String country;//страна в запросе пользователя
-    private float minTemperature;//минимальная и максимальные температуры
+    private String city;
+    private String country;
+    private float minTemperature;
     private float maxTemperature;
-    private String dateTime;//дата прогноза
-    private byte forecastDays;//Количество дней для прогноза
+    private String dateTime;
+    private byte forecastDays;
     
     private WeatherRequest(){}
-    
-    public WeatherRequest(String newCity,
-                          String newCountry,
-                          float newMinTemperature,
-                          float newMaxTemperature,
-                          String newDateTime,
-                          byte newForecastDays)
-    {
-        
-        this.city = newCity;
-        this.country = newCountry;
-        this.minTemperature = newMinTemperature;
-        this.maxTemperature = newMaxTemperature;
-        this.dateTime = newDateTime;
-        this.forecastDays = newForecastDays;
-        
-    }
 
     /**
      * @return the city
@@ -75,7 +58,7 @@ public class WeatherRequest {
     public byte getForecastDays() {
         return forecastDays;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         
@@ -141,9 +124,82 @@ public class WeatherRequest {
     @Override
     public String toString(){
         
-       return "WeatherRequest{city = " + this.getCity() + ", country = " + this.getCountry() 
-               + ", minTemperature = " + this.getMinTemperature() + "°C, maxTemperature = " + this.getMaxTemperature()
-               + "°C, dateTime = " + this.getDateTime() + ", forecasrDays = " + this.getForecastDays() + "}";
+       StringBuilder sb = new StringBuilder();
+       
+       sb.append("WeatherRequest{city = ").append(this.getCity())
+         .append(", country = ").append(this.getCountry())
+         .append(", minTemperature = ").append(this.getMinTemperature())
+         .append("°C, maxTemperature = ").append(this.getMaxTemperature())
+         .append("°C, dateTime = ").append(this.getDateTime())
+         .append(", forecasrDays = ").append(this.getForecastDays())
+         .append("}");
         
+       return sb.toString();
+        
+    }
+    
+    public static Builder newBuilder(){
+        
+        return new WeatherRequest().new Builder();
+        
+    }
+    
+    public class Builder{
+        
+        private Builder(){}
+        
+        public Builder setCity(String city){
+            
+            WeatherRequest.this.city = city;
+            
+            return this;
+            
+        }
+        
+        public Builder setCountry(String country){
+            
+            WeatherRequest.this.country = country;
+            
+            return this;
+            
+        }
+        
+        public Builder setMinTemperature(float minTemperature){
+            
+            WeatherRequest.this.minTemperature = minTemperature;
+            
+            return this;
+            
+        }
+        
+        public Builder setMaxTemperature(float maxTemperature){
+            
+            WeatherRequest.this.maxTemperature = maxTemperature;
+            
+            return this;
+            
+        }
+        
+        public Builder setDateTime(String dateTime){
+            
+            WeatherRequest.this.dateTime = dateTime;
+            
+            return this;
+            
+        }
+        
+        public Builder setForecastDays(byte forecastDays){
+            
+            WeatherRequest.this.forecastDays = forecastDays;
+            
+            return this;
+            
+        }
+        
+        public WeatherRequest build(){
+            
+            return WeatherRequest.this;
+            
+        }
     }
 }

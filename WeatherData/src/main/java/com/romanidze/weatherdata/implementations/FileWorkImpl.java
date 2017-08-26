@@ -27,7 +27,24 @@ public class FileWorkImpl implements FileWorkInterface{
     @Override
     public void saveToXML(List<WeatherRequest> weatherRequests) {
         
-        Path filePath = Paths.get("src/main/resources/xmls", weatherRequests.get(0).getCity() + "_results.xml");
+        Path dirPath = Paths.get("results").toAbsolutePath();
+        
+        if(!Files.exists(dirPath)){
+            
+            try {
+                
+                Files.createDirectory(dirPath);
+                
+            } catch (IOException ex) {
+                
+                System.err.println("Произошла ошибка во время создания папки");
+                
+            }
+            
+        }
+        
+        Path filePath = Paths.get(dirPath.toString(), weatherRequests.get(0).getCity() + "_results.xml")
+                             .toAbsolutePath();
         
         if(!Files.exists(filePath)){
             

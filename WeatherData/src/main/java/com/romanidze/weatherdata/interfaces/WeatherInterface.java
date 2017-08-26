@@ -9,8 +9,7 @@ import java.util.List;
  */
 public interface WeatherInterface {
     
-    String getAPIKey();//получение api-ключа от сервиса OpenWeatherMap
-    //получение прогнозов по запросу пользователя
+    String getAPIKey();
     List<WeatherRequest> getListOfWeatherRequests(String city, String country, byte forecastDays);
     
 }
