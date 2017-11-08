@@ -1,0 +1,13 @@
+.nav-color{
+    background-color: #0D47A1 !important;
+}
+
+.view_info{
+    padding-top: 6%;
+    padding-bottom: 6%;
+    position: relative;
+}
+
+.modal {
+    max-height: 90%;
+}
