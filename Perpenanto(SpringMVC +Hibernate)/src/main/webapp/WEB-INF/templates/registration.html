@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/entry_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Страница входа</title>
+
+</head>
+
+<body>
+
+<div th:replace="header :: service-header">
+
+    <nav class = "nav-color">
+
+        <div class = "nav-wrapper">
+
+            <a href = "#" class = "brand-logo left">*здесь должен быть логотип*</a>
+
+            <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+
+                <li><a th:href = "@{/index}">Главная страница</a></li>
+                <li><a href = "#">Каталог товаров</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</div>
+
+<div class = "forms">
+
+    <h5 class = "black-text text-lighten-3 center-align">Зарегистрируйтесь для входа в личный кабинет: </h5>
+    <br/>
+
+    <h3 class = "red-text text-lighten-3 center-align" th:text="${error ne null} ? ${error}"></h3>
+
+    <div class = "row">
+
+        <form class = "col s12 m8 offset-m2 l6 offset-l3" th:action="@{/user/profile}" method="POST">
+
+            <div class="row">
+
+                <div class="col s12 m8 offset-m2 l9 offset-l2">
+
+                    <div class = "input-field inline col s8">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="text" class="validate" name = "email"/>
+                        <label for="email"  class = "active">Email: </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class="col s12 m8 offset-m2 l9 offset-l2">
+
+                    <div class = "input-field inline col s8">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id = "password" type = "password" class = "validate valign-wrapper" name = "password"/>
+                        <label for = "password" class = "active">Пароль: </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class="col s12 m8 offset-m2 l6 offset-l4">
+
+                   <i class="material-icons prefix">face</i>
+                   <input id = "person_name" type = "text" class = "validate valign-wrapper" name = "personName"/>
+                   <label for="person_name" class="active">Ваше имя:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class="col s12 m8 offset-m2 l6 offset-l4">
+
+                    <i class="material-icons prefix">face</i>
+                    <input id = "person_surname" type = "text" class = "validate valign-wrapper" name = "personSurname"/>
+                    <label for="person_surname" class="active">Ваша фамилия:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l2">
+
+                    <i class="material-icons prefix">card_travel</i>
+                    <select name="country" title="Страна">
+                        <option value="" disabled selected>Выберите страну:</option>
+                        <option value="Азербайджан">Азербайджан</option>
+                        <option value="Армения">Армения</option>
+                        <option value="Беларусь">Беларусь</option>
+                        <option value="Казахстан">Казахстан</option>
+                        <option value="Киргизия">Киргизия</option>
+                        <option value="Молдавия">Молдавия</option>
+                        <option value="Россия">Россия</option>
+                        <option value="Таджикистан">Таджикистан</option>
+                        <option value="Туркменистан">Туркменистан</option>
+                        <option value="Узбекистан">Узбекистан</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l2">
+
+                    <i class="material-icons prefix">home</i>
+                    <input id = "postal_code" type="text" class = "validate valign-wrapper" name = "postalCode"/>
+                    <label for="postal_code" class="active">Почтовый индекс:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l2">
+
+                    <i class="material-icons prefix">home</i>
+                    <input id = "city" type="text" class = "validate valign-wrapper" name = "city"/>
+                    <label for="city" class="active">Город:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l2">
+
+                    <i class="material-icons prefix">home</i>
+                    <input id = "street" type="text" class = "validate valign-wrapper" name = "street"/>
+                    <label for="street" class="active">Улица:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l2">
+
+                    <i class="material-icons prefix">home</i>
+                    <input id = "home_number" type="text" class = "validate valign-wrapper" name = "homeNumber"/>
+                    <label for="home_number" class="active">Номер дома:</label>
+
+                </div>
+
+            </div>
+
+            <div class = "row">
+
+                <div class = "col s12 m8 offset-m2 l9 offset-l3">
+
+                    <button class="btn waves-effect waves-light" type="submit" value="profile">Зарегистрироваться
+                        <i class="material-icons right">send</i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/materialize.min.js}"></script>
+<script th:src="@{/js/initial.js}"></script>
+
+</body>
+
+</html>

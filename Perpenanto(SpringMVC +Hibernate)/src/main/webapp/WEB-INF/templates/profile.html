@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/profile_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Профиль</title>
+
+</head>
+
+<body>
+
+    <div th:replace="header :: service-header">
+
+        <nav class = "nav-color">
+
+            <div class = "nav-wrapper">
+
+                <a href = "#" class = "brand-logo left">*здесь должен быть логотип*</a>
+
+                <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+
+                    <li><a th:href = "@{/index}">Главная страница</a></li>
+                    <li><a href = "#">Каталог товаров</a></li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+    <div class = "row">
+
+        <div class = "col s12 m6 l6">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1"
+                    th:text="'Заказов: ' + ${reservationCount}">
+                <i class = "material-icons right">assignment</i>
+            </button>
+
+            <div id = "modal1" class = "modal">
+
+              <div class = "modal-content">
+
+                <h4 class = "black-text text-lighten-3 center-align"
+                    th:text="'Потраченных денег на заказы: ' + ${spendedMoneyOnReservations} + 'Р'"></h4>
+
+                <ul class = "collapsible popout" data-collapsible="accordion">
+
+                    <li th:each="reservation : ${reservations}">
+
+                        <div class="collapsible-header" th:text="'Заказ № ' + ${reservation.key.userReservation.id}">
+                            <i class="material-icons">assignment</i>
+                        </div>
+
+                        <div class = "collapsible-body">
+
+                            <p th:text="'Статус заказа: ' + ${reservation.key.status}">
+                            </p>
+
+                            <p th:text="'Дата создания заказа: ' + ${reservation.createdAt}">
+                            </p>
+
+                            <p th:each="product : ${reservation.key.products}">
+
+                                <span th:text="${product.title}">
+                                </span> -
+                                <span th:text="${product.price} + 'Р'">
+                                </span>
+
+                            </p>
+
+                            <p th:text="'Цена заказа: ' + ${reservation.value} + ' Р'">
+                            </p>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+              </div>
+
+              <div class = "modal-footer">
+
+                <button class=" modal-action modal-close waves-effect waves-green btn-flat">
+                    Закрыть
+                </button>
+
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class = "col s12 m6 l6">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal2"
+                    th:text="'Товаров: ' + ${products.size()}">
+                <i class = "material-icons right">attach_money</i>
+            </button>
+
+            <div id = "modal2" class="modal">
+
+                <div class = "modal-content">
+
+                    <h4 class = "black-text text-lighten-3 center-align"
+                        th:text="'Количество проданных товаров: ' + ${soldedProductsCount}"></h4>
+
+                    <h4 class = "black-text text-lighten-3 center-align"
+                        th:text="'Общая стоимость проданного товара: ' + ${commonProductsPrice}"></h4>
+
+                    <ul class = "collapsible popout" data-collapsible="accordion">
+
+                        <li th:each="product : ${products}">
+
+                            <div class = "collapsible-header" th:text="'Название: ' + ${product.title}">
+                                <i class = "material-icons right">attach_money</i>
+                            </div>
+
+                            <div class = "collapsible-body">
+
+                                <p th:text="'Цена: ' + ${product.price} + ' Р'">
+                                </p>
+
+                                <p th:text="'Описание: ' + ${product.description}">
+                                </p>
+
+                                <p th:text="'Ссылка на фото: ' + ${product.photoLink}">
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class = "modal-footer">
+
+                    <button class=" modal-action modal-close waves-effect waves-green btn-flat">
+                        Закрыть
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class = "profile">
+
+        <h5 class = "black-text text-lighten-3 center-align">Информация о пользователе: </h5>
+        <br/>
+
+        <ul class = "collapsible" data-collapsible="accordion">
+
+            <li>
+
+                <div class = "collapsible-header">
+
+                    <i class="material-icons">email</i>
+                    Электронная почта
+                    <span class = "badge" th:text="${email}">
+                                example@example.com
+                      </span>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class = "collapsible-header">
+
+                    <i class="material-icons">face</i>
+                    Имя
+                    <span class = "badge" th:text="${name}">
+                               *имя*
+                    </span>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class = "collapsible-header">
+
+                    <i class="material-icons">face</i>
+                    Фамилия
+                    <span class = "badge" th:text="${surname}">
+                                *фамилия*
+                      </span>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class = "row">
+
+        <div class = "col s12 m12 offset-m6 l12 offset-l6">
+
+            <h5 class = "black-text text-lighten-3 center-align">Адреса пользователя</h5>
+
+            <ul class = "collapsible popout" data-collapsible="accordion">
+
+                <li th:each="address : ${addresses}">
+
+                    <div class = "collapsible-header" th:text="'Страна: ' + ${address.country}">
+                        <i class = "material-icons right">home</i>
+                    </div>
+
+                    <div class = "collapsible-body">
+
+                        <p th:text="'Почтовый индекс: ' + ${address.postalCode}">
+                        </p>
+
+                        <p th:text="'Город: ' + ${address.city}">
+                        </p>
+
+                        <p th:text="'Улица: ' + ${address.street}">
+                        </p>
+
+                        <p th:text="'Номер дома: ' + ${address.homeNumber}">
+                        </p>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/modal_init.js}"></script>
+    <script th:src="@{/js/collapsible_init.js}"></script>
+
+</body>
+
+</html>

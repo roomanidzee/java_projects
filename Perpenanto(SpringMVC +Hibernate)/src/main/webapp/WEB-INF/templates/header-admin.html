@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+
+</head>
+
+<body>
+
+<div th:fragment="adminservice-header">
+
+    <nav class = "nav-color">
+
+        <div class = "nav-wrapper">
+
+            <a href = "#" class = "brand-logo left">*лого*</a>
+
+            <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+
+                <li><a th:href = "@{/admin/products}">Товары сервиса</a></li>
+                <li><a th:href = "@{/admin/products__to_user}">Товары пользователей</a></li>
+                <li><a th:href = "@{/admin/profiles}">Профили пользователей</a></li>
+                <li><a th:href = "@{/admin/reservations}">Заказы пользователей</a></li>
+                <li><a th:href = "@{/admin/reservation_to_user}">Информация о пользователях</a></li>
+                <li><a th:href = "@{/admin/reservations_infos}">Информация о заказах</a></li>
+                <li><a th:href = "@{/admin/addresses}">Адреса пользователей</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/materialize.min.js}"></script>
+</body>
+
+</html>

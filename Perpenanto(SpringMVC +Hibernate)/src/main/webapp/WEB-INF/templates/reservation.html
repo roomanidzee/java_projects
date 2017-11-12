@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/reservation_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Подтверждение заказа</title>
+
+</head>
+
+<body>
+
+    <div th:replace="header :: service-header">
+
+        <nav class = "nav-color">
+
+            <div class = "nav-wrapper">
+
+                <a href = "#" class = "brand-logo left">*здесь должен быть логотип*</a>
+
+                <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+
+                    <li><a th:href = "@{/index}">Главная страница</a></li>
+                    <li><a href = "#">Каталог товаров</a></li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+    <div class = "reservation">
+
+        <h5 class = "black-text text-lighten-3 center-align" th:text="'Оформленный заказ № ' + ${id}"></h5>
+        <br/>
+        <h5 class = "black-text text-lighten-3 center-align"> Товары: </h5>
+        <br/>
+
+        <div class = "row" th:each="product : ${products}">
+
+            <div class = "col s1 m2 l4">
+                <img class="materialboxed responsive-img" th:src = "${product.photoLink}"/>
+            </div>
+
+            <div class = "col s1 m2 l4">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${product.title}"></h6>
+            </div>
+
+            <div class = "col s1 m2 l4">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="'Цена : ' + ${product.price} + ' Р'"></h6>
+            </div>
+
+            <br/>
+
+        </div>
+
+        <h6 class = "black-text text-lighten-3 center-align" th:text="'Общая цена : ' + ${reservationPrice} + ' Р'"></h6>
+        <h6 class = "black-text text-lighten-3 center-align">Заказ будет доставлен по адресу, указанному в вашем профиле</h6>
+
+        <button class=" modal-action modal-close waves-effect waves-green btn-flat" th:href="@{/user/profile}">
+            <i class = "material-icons prefix">home</i>
+            Вернуться в личный кабинет
+        </button>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/initial.js}"></script>
+    <script th:src="@{/js/modal_init.js}"></script>
+
+</body>
+
+</html>

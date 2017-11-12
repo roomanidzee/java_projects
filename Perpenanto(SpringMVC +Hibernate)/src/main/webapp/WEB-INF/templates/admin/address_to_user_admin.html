@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/base_admin_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Адреса пользователей</title>
+
+</head>
+
+<body>
+
+    <div th:replace="templates/header-admin :: adminservice-header"></div>
+
+    <div class = "row">
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">Добавить
+                <i class = "material-icons right">add</i>
+            </button>
+
+            <div id = "modal1" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/addresses}" method="POST" >
+
+                    <div class = "modal-content">
+
+                        <h4 class = "black-text text-lighten-3 center-align">Добавить запись</h4>
+
+                        <div class = "row">
+
+                            <input type="hidden" name="form_action" value="add"/>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">filter_1</i>
+                                    <input id="user_id" type="text" class="validate" name = "user_id">
+                                    <label for="user_id"  class = "active">ID пользователя: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "country" type = "text" class = "validate valign-wrapper" name = "country">
+                                    <label for = "country" class = "active">Страна: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "postIndex" type = "text" class = "validate valign-wrapper" name = "postIndex">
+                                    <label for = "postIndex" class = "active">Почтовый индекс: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "city" type = "text" class = "validate valign-wrapper" name = "city">
+                                    <label for = "city" class = "active">Город: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "street" type = "text" class = "validate valign-wrapper" name = "street">
+                                    <label for = "street" class = "active">Улица: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "homeNumber" type = "text" class = "validate valign-wrapper" name = "homeNumber">
+                                    <label for = "homeNumber" class = "active">Номер дома: </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class = "modal-footer">
+
+                        <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                            Отправить
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal2">Изменить
+                <i class = "material-icons right">create</i>
+            </button>
+
+            <div id = "modal2" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/addresses}" method="POST" >
+
+                    <div class = "modal-content">
+
+                        <h4 class = "black-text text-lighten-3 center-align">Изменить запись</h4>
+
+                        <div class = "row">
+
+                            <input type="hidden" name="form_action" value="update"/>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">filter_1</i>
+                                    <input id="record_id" type="text" class="validate" name = "id">
+                                    <label for="record_id"  class = "active">ID: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">filter_1</i>
+                                    <input id="new_user_id" type="text" class="validate" name = "user_id">
+                                    <label for="new_user_id"  class = "active">ID пользователя: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "new_country" type = "text" class = "validate valign-wrapper" name = "country">
+                                    <label for = "new_country" class = "active">Страна: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "new_postIndex" type = "text" class = "validate valign-wrapper" name = "postIndex">
+                                    <label for = "new_postIndex" class = "active">Почтовый индекс: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "new_city" type = "text" class = "validate valign-wrapper" name = "city">
+                                    <label for = "new_city" class = "active">Город: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "new_street" type = "text" class = "validate valign-wrapper" name = "street">
+                                    <label for = "new_street" class = "active">Улица: </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">home</i>
+                                    <input id = "new_homeNumber" type = "text" class = "validate valign-wrapper" name = "homeNumber">
+                                    <label for = "new_homeNumber" class = "active">Номер дома: </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class = "modal-footer">
+
+                        <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                            Отправить
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal3">Удалить
+                <i class = "material-icons right">clear</i>
+            </button>
+
+            <div id = "modal3" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/addresses}" method="POST">
+
+                    <div class = "modal-content">
+
+                        <h4 class = "black-text text-lighten-3 center-align">Удалить запись</h4>
+
+                        <div class = "row">
+
+                            <input type="hidden" name="form_action" value="delete"/>
+
+                            <div class = "row">
+
+                                <div class = "input-field inline col s12">
+
+                                    <i class="material-icons prefix">filter_1</i>
+                                    <input id="delete_record" type="text" class="validate" name = "id">
+                                    <label for="delete_record"  class = "active">ID: </label>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class = "modal-footer">
+
+                        <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                            Отправить
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class = "row">
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" onclick="createCookie()">По ID(в обратном порядке)</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" onclick="deleteCookie()">Несортированный список</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" value = "1" onclick="changeCookie(this.value)">По ID пользователя</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" value = "2" onclick="changeCookie(this.value)">По почтовому индексу</button>
+        </div>
+
+    </div>
+
+    <div class = "view-info">
+
+        <div class = "row">
+
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    ID
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    ID пользователя
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Страна
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                   Почтовый индекс
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Город
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Улица
+                </h6>
+            </div>
+            <div class = "col s1 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Номер дома
+                </h6>
+            </div>
+
+        </div>
+
+        <div class = "row" th:each="address_to_user : ${address_to_users}">
+
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.id}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.user_id}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.country}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.postalCode}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.city}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.street}"></h6>
+            </div>
+            <div class = "col s12 m1 l1">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${address_to_user.homeNumber}"></h6>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/modal_init.js}"></script>
+    <script th:src="@{/js/cookie_work.js}"></script>
+</body>
+
+</html>
