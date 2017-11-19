@@ -17,4 +17,5 @@ public interface ReservationInfoServiceInterface {
 
     List<TempReservationInfo> getReservationInfos();
 
+
 }

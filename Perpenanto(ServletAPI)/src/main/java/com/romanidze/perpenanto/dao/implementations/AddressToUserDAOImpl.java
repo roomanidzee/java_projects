@@ -19,7 +19,7 @@ public class AddressToUserDAOImpl implements AddressToUserDAOInterface {
     private static final String INSERT_QUERY =
             "INSERT INTO address_to_user(user_id, country, post_index, city, street, home_number) VALUES(?, ?, ?, ?, ?, ?)";
     private static final String FIND_QUERY = "SELECT FROM address_to_user WHERE address_to_user.id = ?";
-    private static final String FIND_ALL_QUERY = "SELECT * FROM address_to_user LEFT JOIN \"user\" ON \"user\".id = address_to_user.user_id";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM user_addresses";
     private static final String DELETE_QUERY = "DELETE FROM address_to_user WHERE address_to_user.id = ?";
     private static final String UPDATE_QUERY = "UPDATE address_to_user " +
      "SET (user_id, country, post_index, city, street, home_number) = (?, ?, ?, ?, ?, ?) " +

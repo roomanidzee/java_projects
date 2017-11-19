@@ -70,7 +70,7 @@ public class ProductDAOImpl implements ProductDAOInterface{
         try(PreparedStatement ps = this.conn.prepareStatement(INSERT_QUERY, new String[] {"id"})){
 
             ps.setString(1, model.getTitle());
-            ps.setInt(2, model.getPrice());
+            ps.setInt(2, model.getPrice() > 100 ? model.getPrice() : model.getPrice() + 100);
             ps.setString(3, model.getDescription());
             ps.setString(4, model.getPhotoLink());
             ps.executeUpdate();
@@ -151,7 +151,7 @@ public class ProductDAOImpl implements ProductDAOInterface{
         try(PreparedStatement ps = this.conn.prepareStatement(UPDATE_QUERY)){
 
             ps.setString(1, model.getTitle());
-            ps.setInt(2, model.getPrice());
+            ps.setInt(2, model.getPrice() > 100 ? model.getPrice() : model.getPrice() + 100);
             ps.setString(3, model.getDescription());
             ps.setString(4, model.getPhotoLink());
             ps.setLong(5, model.getId());

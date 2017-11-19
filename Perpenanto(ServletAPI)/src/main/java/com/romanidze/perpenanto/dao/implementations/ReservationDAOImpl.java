@@ -4,6 +4,8 @@ import com.romanidze.perpenanto.dao.interfaces.ReservationDAOInterface;
 import com.romanidze.perpenanto.models.Reservation;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,11 @@ public class ReservationDAOImpl implements ReservationDAOInterface {
     private static final String UPDATE_QUERY = "UPDATE reservation SET(created_at, status) = (?, ?) " +
                                                 "WHERE reservation.id = ?";
     private static final String FIND_BY_TIMESTAMP = "SELECT FROM reservation WHERE reservation.created_at = ?";
+
+    private final String DATE_TO_CHECK = "2017-11-18 00:00:00";
+    private final String PATTERN_TO_CHECK = "yyyy-MM-d HH:mm:ss";
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.PATTERN_TO_CHECK);
+    private Timestamp timestampToCheck = Timestamp.valueOf(LocalDateTime.parse(this.DATE_TO_CHECK, this.formatter));
 
     private ReservationDAOImpl(){}
 
@@ -67,7 +74,8 @@ public class ReservationDAOImpl implements ReservationDAOInterface {
 
         try(PreparedStatement ps = this.conn.prepareStatement(INSERT_QUERY, new String[] {"id"})){
 
-            ps.setTimestamp(1, model.getCreatedAt());
+            ps.setTimestamp(1,
+                    model.getCreatedAt().after(this.timestampToCheck) ? model.getCreatedAt() : this.timestampToCheck);
             ps.setString(2, model.getStatus());
             ps.executeUpdate();
 
@@ -139,7 +147,8 @@ public class ReservationDAOImpl implements ReservationDAOInterface {
 
         try(PreparedStatement ps = this.conn.prepareStatement(UPDATE_QUERY)){
 
-            ps.setTimestamp(1, model.getCreatedAt());
+            ps.setTimestamp(1,
+                    model.getCreatedAt().after(this.timestampToCheck) ? model.getCreatedAt() : this.timestampToCheck);
             ps.setString(2, model.getStatus());
             ps.setLong(3, model.getId());
 

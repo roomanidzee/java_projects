@@ -7,4 +7,5 @@ import java.util.List;
 public interface ProductToUserDAOInterface extends CrudDAOInterface<ProductToUser, Long>{
 
     List<ProductToUser> findAllByUser(Long userId);
+    Integer countProductsByUser(Long productId);
 }

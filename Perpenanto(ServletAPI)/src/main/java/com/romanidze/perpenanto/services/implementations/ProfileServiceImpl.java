@@ -198,21 +198,14 @@ public class ProfileServiceImpl implements ProfileServiceInterface{
             List<Product> products = new ArrayList<>();
             List<Reservation> reservations = new ArrayList<>();
 
-            List<List<ReservationInfo>> reservationInfos2 = products.stream()
-                                                                    .map(product ->
-                                                                            reservationInfoDAO.findAllByReservationId(product.getId()))
-                                                                    .collect(Collectors.toList());
+            productsToUser.stream()
+                          .map(ProductToUser::getProducts)
+                          .forEachOrdered(products::addAll);
 
-            int soldedProductsCount = reservationInfos2.stream()
-                                                       .mapToInt(reservationInfos ->
-                                                                 reservationInfos.stream()
-                                                                                 .mapToInt(reservationInfo ->
-                                                                                           reservationInfo.getReservationProducts()
-                                                                                                          .size()
-                                                                                 )
-                                                                                 .sum()
-                                                       )
-                                                       .sum();
+
+            int soldedProductsCount = products.stream()
+                                              .mapToInt(product -> productToUserDAO.countProductsByUser(product.getId()))
+                                              .sum();
 
             reservationsToUser.stream()
                               .map(ReservationToUser::getUserReservations)
@@ -227,15 +220,7 @@ public class ProfileServiceImpl implements ProfileServiceInterface{
                                               .mapToInt(Product::getPrice)
                                               .sum();
 
-            int spendedMoneyOnReservations = reservationInfos1.stream()
-                                                             .mapToInt(
-                                                                     reservationInfo ->
-                                                                             reservationInfo.getReservationProducts()
-                                                                                            .stream()
-                                                                                            .mapToInt(Product::getPrice)
-                                                                                            .sum()
-                                                             )
-                                                             .sum();
+            int spendedMoneyOnReservations = reservationInfoDAO.getSpendedMoney(userId);
 
             String email = user.getEmailOrUsername();
             String personName = profile.getPersonName();

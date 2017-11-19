@@ -8,5 +8,6 @@ public interface ReservationInfoDAOInterface extends CrudDAOInterface<Reservatio
 
     List<ReservationInfo> findAllByUserId(Long userId);
     List<ReservationInfo> findAllByReservationId(Long reservationId);
+    Integer getSpendedMoney(Long userId);
 
 }

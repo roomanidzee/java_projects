@@ -8,10 +8,7 @@ import com.romanidze.perpenanto.dao.interfaces.ReservationInfoDAOInterface;
 import com.romanidze.perpenanto.models.Product;
 import com.romanidze.perpenanto.models.ReservationInfo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -35,6 +32,7 @@ public class ReservationInfoDAOImpl implements ReservationInfoDAOInterface{
                                                       "WHERE reservation_info.user_id = ?";
     private static final String FIND_BY_RESERVATION_QUERY = "SELECT * FROM reservation_info " +
                                                          "WHERE reservation_info.reservation_id = ?";
+    private static final String MONEY_COUNT_QUERY = "{? = CALL spended_money_on_reservations(?)}";
 
     private ReservationInfoDAOImpl(){}
 
@@ -278,5 +276,26 @@ public class ReservationInfoDAOImpl implements ReservationInfoDAOInterface{
         }
 
         return resultList;
+    }
+
+    @Override
+    public Integer getSpendedMoney(Long userId) {
+
+        Integer result = 0;
+
+        try(CallableStatement callStatement = this.conn.prepareCall(MONEY_COUNT_QUERY)){
+
+            callStatement.registerOutParameter(1, Types.INTEGER);
+            callStatement.setLong(2, userId);
+            callStatement.execute();
+
+            result = callStatement.getInt(1);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
     }
 }

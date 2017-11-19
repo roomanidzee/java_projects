@@ -236,9 +236,9 @@ public class ProfileDAOImpl implements ProfileDAOInterface {
 
                     profile = Profile.builder()
                             .id(rs.getLong(1))
-                            .userId(rs.getLong(2))
-                            .personName(rs.getString(3))
-                            .personSurname(rs.getString(4))
+                            .userId(rs.getLong(4))
+                            .personName(rs.getString(2))
+                            .personSurname(rs.getString(3))
                             .addressToUsers(Lists.newArrayList())
                             .build();
 

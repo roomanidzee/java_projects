@@ -7,10 +7,7 @@ import com.romanidze.perpenanto.dao.interfaces.UserDAOInterface;
 import com.romanidze.perpenanto.models.Product;
 import com.romanidze.perpenanto.models.ProductToUser;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -23,13 +20,12 @@ public class ProductToUserDAOImpl implements ProductToUserDAOInterface{
 
     private static final String INSERT_QUERY = "INSERT INTO product_to_user(user_id, product_id) VALUES (?, ?)";
     private static final String FIND_QUERY = "SELECT FROM product_to_user WHERE product_to_user.id = ?";
-    private static final String FIND_ALL_QUERY = "SELECT * FROM product_to_user " +
-            "LEFT JOIN \"user\" ON \"user\".id = product_to_user.user_id " +
-            "LEFT JOIN product ON product.id = product_to_user.product_id";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM user_products";
     private static final String DELETE_QUERY = "DELETE FROM product_to_user WHERE product_to_user.id = ?";
     private static final String UPDATE_QUERY =
             "UPDATE product_to_user SET(user_id, product_id) = (?, ?) WHERE product_to_user.id = ?";
     private static final String FIND_BY_USER_QUERY = "SELECT * FROM product_to_user WHERE product_to_user.user_id = ?";
+    private static final String PRODUCTS_COUNT_QUERY = "{ ? = CALL solded_products_count(?) }";
 
     private ProductToUserDAOImpl(){}
 
@@ -230,5 +226,25 @@ public class ProductToUserDAOImpl implements ProductToUserDAOInterface{
 
         return resultList;
 
+    }
+
+    @Override
+    public Integer countProductsByUser(Long productId) {
+
+        Integer result = 0;
+
+        try(CallableStatement callStat = this.conn.prepareCall(PRODUCTS_COUNT_QUERY)){
+
+            callStat.registerOutParameter(1, Types.INTEGER);
+            callStat.setLong(2, productId);
+            callStat.execute();
+
+            result = callStat.getInt(1);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
