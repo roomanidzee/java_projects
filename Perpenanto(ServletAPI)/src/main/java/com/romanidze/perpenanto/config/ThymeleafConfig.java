@@ -1,6 +1,5 @@
 package com.romanidze.perpenanto.config;
 
-import com.romanidze.perpenanto.config.dialects.ResourceDialect;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
@@ -29,10 +28,7 @@ public class ThymeleafConfig implements ServletContextListener{
     private TemplateEngine templateEngine(ServletContext sc){
 
         TemplateEngine engine = new TemplateEngine();
-
         engine.setTemplateResolver(this.templateResolver(sc));
-        engine.addDialect(new ResourceDialect());
-
         return engine;
 
     }
@@ -45,7 +41,6 @@ public class ThymeleafConfig implements ServletContextListener{
         resolver.setSuffix(".html");
         resolver.setTemplateMode(TemplateMode.HTML);
         resolver.setCharacterEncoding("UTF-8");
-        resolver.setCacheable(true);
 
         return resolver;
     }

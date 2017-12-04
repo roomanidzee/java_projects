@@ -39,7 +39,7 @@ public class UserAdminController extends HttpServlet{
         context.setVariable("users", users);
 
         try{
-            engine.process("admin/users_admin.html", context, resp.getWriter());
+            engine.process("users_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }
