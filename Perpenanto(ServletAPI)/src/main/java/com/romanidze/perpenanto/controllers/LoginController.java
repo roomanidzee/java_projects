@@ -27,7 +27,6 @@ public class LoginController extends HttpServlet {
 
         try {
             engine.process("login.html", context, resp.getWriter());
-            resp.sendRedirect("/login");
         } catch (IOException e) {
             e.printStackTrace();
         }

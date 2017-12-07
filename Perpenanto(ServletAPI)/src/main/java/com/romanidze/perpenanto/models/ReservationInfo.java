@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"userProfile", "userReservation", "reservationProducts"})
 public class ReservationInfo {
 
     private Long id;

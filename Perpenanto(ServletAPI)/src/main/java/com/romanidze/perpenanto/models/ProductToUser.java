@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"user", "products"})
 public class ProductToUser {
 
     private Long id;

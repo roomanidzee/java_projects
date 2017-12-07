@@ -33,7 +33,6 @@ public class RegistrationController extends HttpServlet{
 
         try {
             engine.process("registration.html", context, resp.getWriter());
-            resp.sendRedirect("/register");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"addressToUsers"})
 public class Profile {
 
     private Long id;

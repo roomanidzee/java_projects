@@ -60,12 +60,12 @@ public class ProfileDAOImpl implements ProfileDAOInterface {
             while (rs.next()) {
 
                 Profile profile = Profile.builder()
-                        .id(rs.getLong("id"))
-                        .userId(rs.getLong("user_id"))
-                        .personName(rs.getString("person_name"))
-                        .personSurname(rs.getString("person_surname"))
-                        .addressToUsers(Lists.newArrayList())
-                        .build();
+                                         .id(rs.getLong("id"))
+                                         .userId(rs.getLong("user_id"))
+                                         .personName(rs.getString("person_name"))
+                                         .personSurname(rs.getString("person_surname"))
+                                         .addressToUsers(Lists.newArrayList())
+                                         .build();
 
                 AddressToUser addressToUser = this.addressToUserDAO.find(profile.getId());
                 profile.getAddressToUsers().add(addressToUser);

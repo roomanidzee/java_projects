@@ -39,7 +39,7 @@ public class UserAdminController extends HttpServlet{
         context.setVariable("users", users);
 
         try{
-            engine.process("users_admin", context, resp.getWriter());
+            engine.process("admin/users_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,14 +49,12 @@ public class UserAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
         String action = req.getParameter("form_action");
 
         User user = User.builder()
-                        .id(id)
                         .emailOrUsername(username)
                         .password(password)
                         .build();
@@ -70,10 +68,14 @@ public class UserAdminController extends HttpServlet{
                 break;
 
             case "update":
+                Long id = Long.valueOf(req.getParameter("id"));
+                user.setId(id);
                 userService.updateUser(user);
                 break;
 
             case "delete":
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                user.setId(id1);
                 userService.deleteUser(user.getId());
                 break;
 

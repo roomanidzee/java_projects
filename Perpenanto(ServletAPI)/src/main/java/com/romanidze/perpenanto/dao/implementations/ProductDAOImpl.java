@@ -45,14 +45,18 @@ public class ProductDAOImpl implements ProductDAOInterface{
         try(PreparedStatement ps = this.conn.prepareStatement(FIND_ALL_QUERY);
             ResultSet rs = ps.executeQuery()){
 
-            Product product = Product.builder()
-                                     .id(rs.getLong(1))
-                                     .title(rs.getString(2))
-                                     .price(rs.getInt(3))
-                                     .description(rs.getString(4))
-                                     .photoLink(rs.getString(5))
-                                     .build();
-            resultList.add(product);
+            while(rs.next()){
+
+                Product product = Product.builder()
+                                         .id(rs.getLong(1))
+                                         .title(rs.getString(2))
+                                         .price(rs.getInt(3))
+                                         .description(rs.getString(4))
+                                         .photoLink(rs.getString(5))
+                                         .build();
+                resultList.add(product);
+
+            }
 
         }catch(SQLException e){
 

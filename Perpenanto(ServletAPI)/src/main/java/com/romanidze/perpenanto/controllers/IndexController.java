@@ -30,7 +30,6 @@ public class IndexController extends HttpServlet{
 
         try{
             engine.process("index.html", context, resp.getWriter());
-            resp.sendRedirect("/index");
         } catch (IOException e) {
             e.printStackTrace();
         }

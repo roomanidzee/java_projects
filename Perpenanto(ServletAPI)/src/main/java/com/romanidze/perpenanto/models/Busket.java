@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"userProfile", "products"})
 public class Busket {
 
     private Long id;

@@ -88,7 +88,6 @@ public class AddressToUserAdminController extends HttpServlet{
 
         try{
             engine.process("admin/address_to_user_admin.html", context, resp.getWriter());
-            resp.sendRedirect("/admin/addresses");
         }catch (IOException e) {
             e.printStackTrace();
         }
