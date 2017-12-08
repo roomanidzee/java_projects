@@ -277,7 +277,7 @@ public class ProfileServiceImpl implements ProfileServiceInterface{
             propertyMap.forEach(context::setVariable);
 
             try {
-                engine.process("profile.html", context, resp.getWriter());
+                engine.process("profile", context, resp.getWriter());
             } catch (IOException e) {
                 e.printStackTrace();
             }

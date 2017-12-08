@@ -32,7 +32,7 @@ public class RegistrationController extends HttpServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         try {
-            engine.process("registration.html", context, resp.getWriter());
+            engine.process("registration", context, resp.getWriter());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -47,7 +47,7 @@ public class ReservationInfoAdminController extends HttpServlet{
         context.setVariable("reservation_infos", reservationInfos);
 
         try{
-            engine.process("admin/reservation_info_admin.html", context, resp.getWriter());
+            engine.process("admin/reservation_info_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -57,7 +57,6 @@ public class ReservationInfoAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         Long userId = Long.valueOf(req.getParameter("user_id"));
         Long reservationId = Long.valueOf(req.getParameter("order_id"));
         Long productId = Long.valueOf(req.getParameter("product_id"));
@@ -70,7 +69,6 @@ public class ReservationInfoAdminController extends HttpServlet{
         ProductServiceInterface productService = new ProductServiceImpl(req.getServletContext());
 
         ReservationInfo reservationInfo = ReservationInfo.builder()
-                                                         .id(id)
                                                          .userProfile(profileService.findById(userId))
                                                          .userReservation(reservationService.findById(reservationId))
                                                          .reservationProducts(Collections.singletonList(
@@ -85,10 +83,14 @@ public class ReservationInfoAdminController extends HttpServlet{
                 break;
 
             case "update":
+                Long id = Long.valueOf(req.getParameter("id"));
+                reservationInfo.setId(id);
                 reservationInfoService.updateReservationInfo(reservationInfo);
                 break;
 
             case "delete":
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                reservationInfo.setId(id1);
                 reservationInfoService.deleteReservationInfo(reservationInfo.getId());
                 break;
 
@@ -102,7 +104,7 @@ public class ReservationInfoAdminController extends HttpServlet{
         context.setVariable("reservation_infos", reservationInfos);
 
         try{
-            engine.process("admin/reservation_info_admin.html", context, resp.getWriter());
+            engine.process("admin/reservation_info_admin", context, resp.getWriter());
             resp.sendRedirect("/admin/reservations_infos");
         }catch(IOException e){
             e.printStackTrace();

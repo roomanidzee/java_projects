@@ -39,7 +39,7 @@ public class ReservationAdminController extends HttpServlet{
         context.setVariable("reservations",reservations);
 
         try{
-            engine.process("admin/reservations_admin.html", context, resp.getWriter());
+            engine.process("admin/reservations_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -49,7 +49,6 @@ public class ReservationAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         String status = req.getParameter("status");
         Timestamp createdAt = Timestamp.valueOf(req.getParameter("created_at"));
 
@@ -58,7 +57,6 @@ public class ReservationAdminController extends HttpServlet{
         ReservationServiceInterface reservationService = new ReservationServiceImpl(req.getServletContext());
 
         Reservation reservation = Reservation.builder()
-                                             .id(id)
                                              .status(status)
                                              .createdAt(createdAt)
                                              .build();
@@ -70,10 +68,14 @@ public class ReservationAdminController extends HttpServlet{
                 break;
 
             case "update":
+                Long id = Long.valueOf(req.getParameter("id"));
+                reservation.setId(id);
                 reservationService.updateReservation(reservation);
                 break;
 
             case "delete":
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                reservation.setId(id1);
                 reservationService.deleteReservation(reservation.getId());
                 break;
 
@@ -86,8 +88,7 @@ public class ReservationAdminController extends HttpServlet{
         context.setVariable("reservations",reservations);
 
         try{
-            engine.process("admin/reservations_admin.html", context, resp.getWriter());
-            resp.sendRedirect("/admin/reservations");
+            engine.process("admin/reservations_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }

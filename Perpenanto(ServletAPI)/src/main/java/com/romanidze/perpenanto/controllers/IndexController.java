@@ -29,7 +29,7 @@ public class IndexController extends HttpServlet{
         context.setVariable("price3", "300 Р");
 
         try{
-            engine.process("index.html", context, resp.getWriter());
+            engine.process("index", context, resp.getWriter());
         } catch (IOException e) {
             e.printStackTrace();
         }

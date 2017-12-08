@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         try {
-            engine.process("login.html", context, resp.getWriter());
+            engine.process("login", context, resp.getWriter());
         } catch (IOException e) {
             e.printStackTrace();
         }

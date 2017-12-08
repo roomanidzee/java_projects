@@ -140,7 +140,7 @@ public class BusketServiceImpl implements BusketServiceInterface{
         context.setVariable("timestamp", reservation.getCreatedAt());
 
         try{
-            engine.process("busket.html", context, resp.getWriter());
+            engine.process("busket", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }

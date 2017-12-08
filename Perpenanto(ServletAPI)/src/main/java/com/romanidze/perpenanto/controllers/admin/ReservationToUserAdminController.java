@@ -45,7 +45,7 @@ public class ReservationToUserAdminController extends HttpServlet{
         context.setVariable("reservations_to_users", reservationToUsers);
 
         try{
-            engine.process("admin/reservation_to_user_admin.html", context, resp.getWriter());
+            engine.process("admin/reservation_to_user_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -55,7 +55,6 @@ public class ReservationToUserAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         Long userId = Long.valueOf(req.getParameter("user_id"));
         Long reservationId = Long.valueOf(req.getParameter("order_id"));
 
@@ -66,7 +65,6 @@ public class ReservationToUserAdminController extends HttpServlet{
         ReservationServiceInterface reservationService = new ReservationServiceImpl(req.getServletContext());
 
         ReservationToUser reservationToUser = ReservationToUser.builder()
-                                                               .id(id)
                                                                .user(userService.findById(userId))
                                                                .userReservations(Collections.singletonList(
                                                                        reservationService.findById(reservationId)
@@ -81,12 +79,14 @@ public class ReservationToUserAdminController extends HttpServlet{
                 break;
 
             case "update":
-
+                Long id = Long.valueOf(req.getParameter("id"));
+                reservationToUser.setId(id);
                 reservationToUserService.updateReservationToUser(reservationToUser);
                 break;
 
             case "delete":
-
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                reservationToUser.setId(id1);
                 reservationToUserService.deleteReservationToUser(reservationToUser.getId());
                 break;
 
@@ -99,7 +99,7 @@ public class ReservationToUserAdminController extends HttpServlet{
         context.setVariable("reservations_to_users", reservationToUsers);
 
         try{
-            engine.process("admin/reservation_to_user_admin.html", context, resp.getWriter());
+            engine.process("admin/reservation_to_user_admin", context, resp.getWriter());
             resp.sendRedirect("/admin/reservation_to_user");
         }catch(IOException e){
             e.printStackTrace();

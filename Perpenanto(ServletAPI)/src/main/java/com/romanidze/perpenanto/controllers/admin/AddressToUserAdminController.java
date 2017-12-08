@@ -32,7 +32,7 @@ public class AddressToUserAdminController extends HttpServlet{
         context.setVariable("address_to_users", addresses);
 
         try{
-            engine.process("admin/address_to_user_admin.html", context, resp.getWriter());
+            engine.process("admin/address_to_user_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class AddressToUserAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
+
         Long userId = Long.valueOf(req.getParameter("user_id"));
         String country = req.getParameter("country");
         Integer postIndex = Integer.valueOf(req.getParameter("postIndex"));
@@ -53,7 +53,6 @@ public class AddressToUserAdminController extends HttpServlet{
         String action = req.getParameter("form_action");
 
         AddressToUser address = AddressToUser.builder()
-                                             .id(id)
                                              .userId(userId)
                                              .country(country)
                                              .postalCode(postIndex)
@@ -71,10 +70,14 @@ public class AddressToUserAdminController extends HttpServlet{
                break;
 
             case "update":
+               Long id = Long.valueOf(req.getParameter("id"));
+               address.setId(id);
                addressToUserService.updateAddress(address);
                break;
 
             case "delete":
+               Long id1 = Long.valueOf(req.getParameter("id"));
+               address.setId(id1);
                addressToUserService.deleteAddress(address.getId());
                break;
 
@@ -87,7 +90,7 @@ public class AddressToUserAdminController extends HttpServlet{
         context.setVariable("address_to_users", addresses);
 
         try{
-            engine.process("admin/address_to_user_admin.html", context, resp.getWriter());
+            engine.process("admin/address_to_user_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }

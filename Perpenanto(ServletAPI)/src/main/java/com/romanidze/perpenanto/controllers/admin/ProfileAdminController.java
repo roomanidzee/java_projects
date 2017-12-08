@@ -55,7 +55,6 @@ public class ProfileAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         String name = req.getParameter("personName");
         String surname = req.getParameter("personSurname");
         Long userId = Long.valueOf(req.getParameter("user_id"));
@@ -67,7 +66,6 @@ public class ProfileAdminController extends HttpServlet{
         AddressToUserServiceInterface addressService = new AddressToUserServiceImpl(req.getServletContext());
 
         Profile profile = Profile.builder()
-                                 .id(id)
                                  .personName(name)
                                  .personSurname(surname)
                                  .userId(userId)
@@ -81,10 +79,14 @@ public class ProfileAdminController extends HttpServlet{
                 break;
 
             case "update":
+                Long id = Long.valueOf(req.getParameter("id"));
+                profile.setId(id);
                 profileService.updateProfile(profile);
                 break;
 
             case "delete":
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                profile.setId(id1);
                 profileService.deleteProfile(profile.getId());
                 break;
 
@@ -98,8 +100,7 @@ public class ProfileAdminController extends HttpServlet{
         context.setVariable("profiles", profiles);
 
         try{
-            engine.process("admin/profiles_admin.html", context, resp.getWriter());
-            resp.sendRedirect("/admin/profiles");
+            engine.process("admin/profiles_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }

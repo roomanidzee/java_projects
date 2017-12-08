@@ -223,7 +223,7 @@ public class ProductServiceImpl implements ProductServiceInterface{
         context.setVariable("products", products);
 
         try{
-            engine.process("products_catalog.html", context, resp.getWriter());
+            engine.process("products_catalog", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -273,7 +273,7 @@ public class ProductServiceImpl implements ProductServiceInterface{
         context.setVariable("productsCount", busket.getProducts().size());
 
         try{
-            engine.process("products_catalog.html", context, resp.getWriter());
+            engine.process("products_catalog", context, resp.getWriter());
             resp.sendRedirect("/catalog");
         }catch(IOException e){
             e.printStackTrace();

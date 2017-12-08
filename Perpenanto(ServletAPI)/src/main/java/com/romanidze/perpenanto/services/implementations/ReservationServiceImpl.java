@@ -251,7 +251,7 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
         context.setVariable("price", price);
 
         try{
-            engine.process("reservation.html", context, resp.getWriter());
+            engine.process("reservation", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }

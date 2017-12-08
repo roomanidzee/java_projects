@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserServiceInterface{
                 context.setVariable("message", "Вы неправильно ввели логин, или пароль. Введите заново");
 
                 try {
-                    engine.process("login.html", context, resp.getWriter());
+                    engine.process("login", context, resp.getWriter());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -199,7 +199,7 @@ public class UserServiceImpl implements UserServiceInterface{
                     context.setVariable("message", message1);
 
                     try {
-                        engine.process("registration.html", context, resp.getWriter());
+                        engine.process("registration", context, resp.getWriter());
 
                         resp.sendRedirect("/register");
                     } catch (IOException e) {
@@ -217,7 +217,7 @@ public class UserServiceImpl implements UserServiceInterface{
                     context.setVariable("message", message2);
 
                     try {
-                        engine.process("registration.html", context, resp.getWriter());
+                        engine.process("registration", context, resp.getWriter());
 
                         resp.sendRedirect("/register");
                     } catch (IOException e) {
@@ -238,7 +238,7 @@ public class UserServiceImpl implements UserServiceInterface{
                     context.setVariable("message", message4);
 
                     try {
-                        engine.process("registration.html", context, resp.getWriter());
+                        engine.process("registration", context, resp.getWriter());
 
                         resp.sendRedirect("/register");
                     } catch (IOException e) {
@@ -338,6 +338,7 @@ public class UserServiceImpl implements UserServiceInterface{
                                                          configMap.get("db_password"))){
 
             UserDAOInterface userDAO = new UserDAOImpl(conn);
+            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
             userDAO.save(user);
 
         }catch (SQLException e) {

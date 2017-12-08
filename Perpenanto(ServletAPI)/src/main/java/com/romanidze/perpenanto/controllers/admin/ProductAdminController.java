@@ -33,7 +33,7 @@ public class ProductAdminController extends HttpServlet{
         context.setVariable("products", products);
 
         try{
-            engine.process("admin/products_admin.html", context, resp.getWriter());
+            engine.process("admin/products_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,8 +84,7 @@ public class ProductAdminController extends HttpServlet{
         context.setVariable("products", products);
 
         try{
-            engine.process("admin/products_admin.html", context, resp.getWriter());
-            resp.sendRedirect("/admin/products");
+            engine.process("admin/products_admin", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }

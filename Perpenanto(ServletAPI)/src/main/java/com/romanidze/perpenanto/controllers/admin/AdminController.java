@@ -24,7 +24,7 @@ public class AdminController extends HttpServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         try{
-            engine.process("admin/admin_page.html", context, resp.getWriter());
+            engine.process("admin/admin_page", context, resp.getWriter());
         }catch (IOException e) {
             e.printStackTrace();
         }

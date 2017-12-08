@@ -45,7 +45,7 @@ public class ProductToUserAdminController extends HttpServlet{
         context.setVariable("products_to_users", productToUsers);
 
         try{
-            engine.process("admin/product_to_user_admin.html", context, resp.getWriter());
+            engine.process("admin/product_to_user_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -55,7 +55,6 @@ public class ProductToUserAdminController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-        Long id = Long.valueOf(req.getParameter("id"));
         Long userId = Long.valueOf(req.getParameter("user_id"));
         Long productId = Long.valueOf(req.getParameter("product_id"));
 
@@ -66,7 +65,6 @@ public class ProductToUserAdminController extends HttpServlet{
         ProductServiceInterface productService = new ProductServiceImpl(req.getServletContext());
 
         ProductToUser productToUser = ProductToUser.builder()
-                                                   .id(id)
                                                    .user(userService.findById(userId))
                                                    .products(Collections.singletonList(productService.findById(productId)))
                                                    .build();
@@ -78,10 +76,14 @@ public class ProductToUserAdminController extends HttpServlet{
                 break;
 
             case "update":
+                Long id = Long.valueOf(req.getParameter("id"));
+                productToUser.setId(id);
                 productToUserService.updateProductToUser(productToUser);
                 break;
 
             case "delete":
+                Long id1 = Long.valueOf(req.getParameter("id"));
+                productToUser.setId(id1);
                 productToUserService.deleteProductToUser(productToUser.getId());
                 break;
 
@@ -94,8 +96,7 @@ public class ProductToUserAdminController extends HttpServlet{
         context.setVariable("products_to_users", productToUsers);
 
         try{
-            engine.process("admin/product_to_user_admin.html", context, resp.getWriter());
-            resp.sendRedirect("/admin/products_to_user");
+            engine.process("admin/product_to_user_admin", context, resp.getWriter());
         }catch(IOException e){
             e.printStackTrace();
         }
