@@ -119,7 +119,7 @@ $$
 BEGIN
   RETURN (
     WITH query1 AS (SELECT * FROM reservation_info WHERE reservation_info.user_id = user_number),
-         query2 AS (SELECT * FROM product WHERE product.id = query1.reservation_product_id)
+         query2 AS (SELECT * FROM product WHERE product.id IN query1.reservation_product_id)
     SELECT SUM(price) FROM query2
   );
 END;
