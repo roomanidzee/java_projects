@@ -118,16 +118,10 @@ CREATE FUNCTION spended_money_on_reservations(user_number INTEGER) RETURNS INTEG
 $$
 BEGIN
   RETURN (
-<<<<<<< HEAD
       SELECT SUM(price) FROM
         (SELECT * FROM product WHERE product.id IN
                                      (SELECT reservation_product_id FROM reservation_info
                                            WHERE reservation_info.user_id = user_number)) AS pr
-=======
-    WITH query1 AS (SELECT * FROM reservation_info WHERE reservation_info.user_id = user_number),
-         query2 AS (SELECT * FROM product WHERE product.id IN query1.reservation_product_id)
-    SELECT SUM(price) FROM query2
->>>>>>> d5ef17eba5b526a3c22de217c2b1a535c29c60cd
   );
 END;
 $$
