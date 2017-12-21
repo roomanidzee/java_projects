@@ -97,8 +97,8 @@ ALTER TABLE profile ADD FOREIGN KEY (address_id) REFERENCES address_to_user(id);
 
 --представления: начало
 
-CREATE VIEW user_addresses AS SELECT * FROM address_to_user;
-CREATE VIEW user_products AS SELECT * FROM product_to_user;
+CREATE VIEW user_addresses AS SELECT * FROM address_to_user LEFT JOIN "user" ON "user".id = address_to_user.user_id;
+CREATE VIEW user_products AS SELECT * FROM product_to_user LEFT JOIN "user" ON "user".id = product_to_user.user_id;
 
 --представления: конец
 
@@ -118,9 +118,10 @@ CREATE FUNCTION spended_money_on_reservations(user_number INTEGER) RETURNS INTEG
 $$
 BEGIN
   RETURN (
-    WITH query1 AS (SELECT * FROM reservation_info WHERE reservation_info.user_id = user_number),
-         query2 AS (SELECT * FROM product WHERE product.id = query1.reservation_product_id)
-    SELECT SUM(price) FROM query2
+      SELECT SUM(price) FROM
+        (SELECT * FROM product WHERE product.id IN
+                                     (SELECT reservation_product_id FROM reservation_info
+                                           WHERE reservation_info.user_id = user_number)) AS pr
   );
 END;
 $$
