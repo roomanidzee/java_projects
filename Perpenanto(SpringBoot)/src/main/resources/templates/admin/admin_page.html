@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/material-design/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/admin_page_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Страница администратора</title>
+
+</head>
+
+<body>
+
+<div class = "admin">
+
+    <h6 class = "black-text text-lighten-3 center-align">Здравствуй, администратор!</h6>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href="@{/admin/statistics/security}">
+            Логины и пароли пользователей
+        <i class="material-icons right">security</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/products}">
+            Товары сервиса
+        <i class="material-icons right">monetization_on</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/profiles}">
+            Профили пользователей
+        <i class="material-icons right">person</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/reservations}">
+            Заказы пользователей
+        <i class="material-icons right">payment</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/reservations_to_user}">
+            Информация о пользователях
+        <i class="material-icons right">info</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/reservations_infos}">
+            Информация о заказах
+        <i class="material-icons right">info_outline</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/products_to_user}">
+            Товары пользователей
+            <i class="material-icons right">payment</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/addresses}">
+            Адреса пользователей
+            <i class="material-icons right">home</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class="btn waves-effect waves-light" th:href = "@{/admin/statistics/files}">
+            Файлы пользователей
+            <i class="material-icons right">assignment</i>
+        </a>
+    </p>
+
+    <p class = "center-align">
+        <a class = "waves-effect waves-light btn" th:href="@{/logout}">
+            <i class = "material-icons right">directions_run</i>
+            Выйти
+        </a>
+    </p>
+
+</div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+</body>
+
+</html>

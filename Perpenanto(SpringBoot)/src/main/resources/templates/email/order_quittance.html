@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Квитанция заказа</title>
+
+</head>
+<body>
+
+    <table align="center">
+
+        <tr>
+            <td>Title of product</td>
+            <td>Price(in rubles)</td>
+        </tr>
+
+        <tr th:each="product : ${products}">
+            <td th:text="${product.title}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+
+    </table>
+
+    <h6 align="center" th:text="'Cost of order: ' + ${price}"></h6>
+    <h6 align="center" th:text="'Date of order: ' + ${timestamp}"></h6>
+
+</body>
+</html>

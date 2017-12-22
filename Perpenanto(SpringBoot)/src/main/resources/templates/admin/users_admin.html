@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/material-design/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/base_admin_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Логины и пароли пользователей</title>
+
+</head>
+<body>
+
+    <div th:replace="common/header-admin :: adminservice-header"></div>
+
+    <div class = "row">
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">Добавить
+                <i class = "material-icons right">add</i>
+            </button>
+
+            <div id = "modal1" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/statistics/security}" method="POST" >
+
+                <div class = "modal-content">
+
+                    <h4 class = "black-text text-lighten-3 center-align">Добавить запись</h4>
+
+                    <div class = "row">
+
+                        <input type="hidden" name="form_action" value="add"/>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">email</i>
+                                <input id="email" type="text" class="validate" name = "username"/>
+                                <label for="email"  class = "active">Логин: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">face</i>
+                                <input id = "role" type = "text" class = "validate valign-wrapper" name = "role"/>
+                                <label for = "role" class = "active">Роль: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">face</i>
+                                <input id = "state" type = "text" class = "validate valign-wrapper" name = "state"/>
+                                <label for = "state" class = "active">Состояние: </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class = "modal-footer">
+
+                    <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                        Отправить
+                    </button>
+
+                </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal2">Изменить
+                <i class = "material-icons right">create</i>
+            </button>
+
+            <div id = "modal2" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/statistics/security}" method="POST" >
+
+                <div class = "modal-content">
+
+                    <h4 class = "black-text text-lighten-3 center-align">Изменить запись</h4>
+
+                    <div class = "row">
+
+                        <input type="hidden" name="form_action" value="update"/>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">filter_1</i>
+                                <input id="record_id" type="text" class="validate" name = "id"/>
+                                <label for="record_id"  class = "active">ID: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">email</i>
+                                <input id="new_email" type="text" class="validate" name = "username"/>
+                                <label for="new_email"  class = "active">Логин: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">lock_outline</i>
+                                <input id = "new_password" type = "text" class = "validate valign-wrapper" name = "password"/>
+                                <label for = "new_password" class = "active">Пароль: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">face</i>
+                                <input id = "new_role" type = "text" class = "validate valign-wrapper" name = "role"/>
+                                <label for = "new_role" class = "active">Роль: </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">face</i>
+                                <input id = "new_state" type = "text" class = "validate valign-wrapper" name = "state"/>
+                                <label for = "new_state" class = "active">Состояние: </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class = "modal-footer">
+
+                    <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                        Отправить
+                    </button>
+
+                </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class = "col s12 m6 l4">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal3">Удалить
+                <i class = "material-icons right">clear</i>
+            </button>
+
+            <div id = "modal3" class = "modal">
+
+                <form class = "col s12" th:action="@{/admin/statistics/security}" method="POST">
+
+                <div class = "modal-content">
+
+                    <h4 class = "black-text text-lighten-3 center-align">Удалить запись</h4>
+
+                    <div class = "row">
+
+                        <input type="hidden" name="form_action" value="delete"/>
+
+                        <div class = "row">
+
+                            <div class = "input-field inline col s12">
+
+                                <i class="material-icons prefix">filter_1</i>
+                                <input id="delete_record" type="text" class="validate" name = "id"/>
+                                <label for="delete_record"  class = "active">ID: </label>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class = "modal-footer">
+
+                    <button class=" modal-action modal-close waves-effect waves-green btn-flat" type = "submit">
+                        Отправить
+                    </button>
+
+                </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class = "row">
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" onclick="createCookie()">По ID(в обратном порядке)</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" onclick="deleteCookie()">Несортированный список</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" value = "1" onclick="changeCookie(this.value)">Сортировать по почте</button>
+        </div>
+
+        <div class = "col s12 m4 l3">
+            <button class="btn waves-effect waves-light" value = "2" onclick="changeCookie(this.value)">Сортировать по паролю</button>
+        </div>
+
+    </div>
+
+    <div class = "view-info">
+
+        <div class = "row">
+
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    ID
+                </h6>
+            </div>
+
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Логин
+                </h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Пароль
+                </h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Роль
+                </h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    Статус
+                </h6>
+            </div>
+
+        </div>
+
+        <div class = "row" th:each="user : ${users}">
+
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${user.id}"></h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${user.login}"></h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align truncate" th:text="${user.protectedPassword}"></h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${user.role}"></h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${user.state}"></h6>
+            </div>
+            <div class = "col s1 m2 l2">
+                <select name = "operations" title="Операции">
+                    <option value="" disabled = "true" selected = "true">Ваше действие:</option>
+                    <option>
+                        <a th:href="@{/admin/action/create_temp_password/${user.id}}">
+                                 Генерация временного пароля
+                        </a>
+                    </option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/initial.js}"></script>
+    <script th:src="@{/js/modal_init.js}"></script>
+    <script th:src="@{/js/cookie_work.js}"></script>
+</body>
+</html>

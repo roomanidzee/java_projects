@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/material-design/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/base_admin_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Товары пользователей</title>
+
+</head>
+
+<body>
+
+    <div th:replace="common/header-admin :: adminservice-header"></div>
+
+    <div class = "view-info">
+
+        <div class = "row">
+
+            <div class = "col s12 m4 l4">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    ID файла
+                </h6>
+            </div>
+
+            <div class = "col s12 m4 l4">
+                <h6 class = "black-text text-lighten-3 center-align">
+                    ID пользователя
+                </h6>
+            </div>
+
+        </div>
+
+        <div class = "row" th:each="file_to_user : ${files_to_users}">
+
+            <div class = "col s12 m4 l4">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${file_to_user.fileId}"></h6>
+            </div>
+            <div class = "col s12 m4 l4">
+                <h6 class = "black-text text-lighten-3 center-align" th:text="${file_to_user.userId}"></h6>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/modal_init.js}"></script>
+    <script th:src="@{/js/cookie_work.js}"></script>
+
+</body>
+
+</html>
