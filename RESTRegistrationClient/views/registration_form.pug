@@ -1,0 +1,11 @@
+form.form(action = 'http://127.0.0.1:8080/register' method = 'POST')
+    h2 Регистрация
+    label(for = 'surname') Фамилия
+    input(type = 'text' id = 'surname' name = "surname")
+    label(for = 'name') Имя
+    input(type = 'text' id = 'name' name = 'name')
+    label(for='email') Адрес электронной почты
+    input(type='email' id = 'email' name='email')
+    button(type='submit') Отправить данные
+
+a(href = '/profile') Войти в профиль

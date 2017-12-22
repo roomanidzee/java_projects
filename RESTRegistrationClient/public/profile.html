@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Информация о профиле</title>
+</head>
+<body>
+
+<h1>Информация о профиле</h1>
+<h1 id ="surname"></h1>
+<h1 id ="name"></h1>
+<h1 id ="email"></h1>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script>
+
+    $.ajax({
+
+        url: 'http://127.0.0.1:8080/get_profile',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $('#surname').text(data.surname);
+            $('#name').text(data.name);
+            $('#email').text(data.email);
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

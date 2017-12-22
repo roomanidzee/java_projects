@@ -1,0 +1,16 @@
+{
+  "name": "rest_registration_client",
+  "version": "1.0.0",
+  "description": "Client for registration on REST (JavaEE)",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrey Romanov (Romanidze)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
+  }
+}
