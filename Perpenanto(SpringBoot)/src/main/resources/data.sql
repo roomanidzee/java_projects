@@ -8,7 +8,7 @@ INSERT INTO profile(user_id, email, person_name, person_surname)
   WHERE NOT EXISTS(SELECT user_id FROM profile WHERE user_id = 1);
 
 INSERT INTO address(id, city, country, home_number, postal_code, street)
-  SELECT 1, 'Казань', 'Россия', 3, 420033, 'Сабан'
+  SELECT 1, 'Казань', 'Россия', , , ''
   WHERE NOT EXISTS(SELECT id FROM address WHERE id = 1);
 
 INSERT INTO address_to_user(unique_user_id, address_id)
