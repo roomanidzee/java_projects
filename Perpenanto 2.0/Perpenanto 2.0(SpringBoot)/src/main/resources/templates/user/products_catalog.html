@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/material-design/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/product_style.css}" media="screen,projection"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Каталог товаров</title>
+
+</head>
+
+<body>
+
+
+    <nav class = "nav-color">
+
+        <div class = "nav-wrapper">
+
+            <a href = "#" class = "brand-logo left">*здесь должен быть логотип*</a>
+
+            <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+
+                <li><a th:href = "@{/index}">Главная страница</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div class = "centerized">
+
+        <h5 class = "black-text text-lighten-3 center-align"
+            th:text="'Товаров в корзине: ' +
+            ${products_count != null and products_count &gt; 0 ? products_count : '0'}"></h5>
+
+        <p class="center-align">
+              <a class = "waves-effect waves-light btn red" th:href="@{/user/busket}">
+                  <i class = "material-icons right">shopping_cart</i>
+                  Перейти в корзину
+              </a>
+        </p>
+
+    </div>
+
+    <div class = "product">
+
+        <div class ="row" >
+
+            <div class = "col s12 m4 l4" th:each = "product : ${products}">
+
+                <form th:action = "@{/user/catalog}" method="POST">
+
+                    <input type="hidden" name = "productId" th:value="${product.id}"/>
+
+                    <h6 class = "black-text text-lighten-3 center-align" th:text="${product.title}"></h6>
+                    <br/>
+                    <div class = "centerized">
+                    <img class="materialboxed" width="300px" height="200px" th:src = "${product.photoLink}"/>
+                    </div>
+                    <br/>
+                    <h6 class = "black-text text-lighten-3 center-align" th:text="'Цена : ' + ${product.price} + ' Р'"></h6>
+                    <p class = "center-align">
+                        <button class="btn waves-effect waves-light" type="submit">Добавить в корзину
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/send_form.js}"></script>
+</body>
+
+</html>

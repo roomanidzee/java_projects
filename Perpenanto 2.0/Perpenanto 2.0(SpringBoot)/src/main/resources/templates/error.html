@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+Copyright (c) 2017 by SQFreaKz (https://codepen.io/sqfreakz/pen/GJRJOY)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies
+ or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/error_style.css}"/>
+    <title>Сообщение об ошибке</title>
+</head>
+<body>
+
+   <div id="clouds">
+
+       <div class="cloud x1"></div>
+       <div class="cloud x1_5"></div>
+       <div class="cloud x2"></div>
+       <div class="cloud x3"></div>
+       <div class="cloud x4"></div>
+       <div class="cloud x5"></div>
+
+   </div>
+
+   <div class='c'>
+
+       <div class = "_error-code" th:text="${status}"></div>
+       <div class='_2' th:text="'Ошибка: ' + ${error}"></div>
+       <div class='_2' th:text="'Сообщение: ' + ${message}"></div>
+       <div class='_2' th:text="'Дата: ' + ${timestamp}"></div>
+
+   </div>
+
+</body>
+</html>

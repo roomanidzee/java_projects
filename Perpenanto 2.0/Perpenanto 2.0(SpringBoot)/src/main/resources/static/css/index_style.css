@@ -1,0 +1,36 @@
+.intro
+{
+    text-align: center;
+    padding-top: 13%;
+    padding-bottom: 13%;
+    position: relative;
+}
+
+.intro h1
+{
+    font-weight: 6px;
+}
+
+.intro h5
+{
+    padding: 10px;
+    display: inline-block;
+    font-size: 1.8rem;
+}
+
+.about{
+    padding-top: 5%;
+    padding-bottom: 8%;
+    position: relative;
+}
+
+.about h5{
+    margin-bottom: 50px;
+}
+
+.about h6{
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.centerized { text-align: center }
