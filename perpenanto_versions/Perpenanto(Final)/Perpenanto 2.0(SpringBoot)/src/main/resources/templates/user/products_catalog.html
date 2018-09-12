@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/css/material-design/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/product_style.css}" media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+    <script th:src="@{/js/nouislider.min.js}"></script>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Каталог товаров</title>
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+
+        let slider = document.getElementById('range-slider');
+
+
+        noUiSlider.create(slider, {
+           start: [200, 800],
+           connect: true,
+           step: 1,
+           orientation: 'horizontal',
+           range: {
+               'min': 0,
+               'max': [[ ${maxPrice} ]]
+          }
+        });
+
+
+
+        let minCostInput = document.getElementById('start'),
+            maxCostInput = document.getElementById('end');
+
+        slider.noUiSlider.on('update', function( values, handle ) {
+            if ( handle ) {
+                maxCostInput.value = values[handle];
+            } else {
+                minCostInput.value = values[handle];
+            }
+        });
+
+        minCostInput.addEventListener('change', function(){
+           slider.noUiSlider.set([null, this.value]);
+        });
+
+        maxCostInput.addEventListener('change', function(){
+            slider.noUiSlider.set([null, this.value]);
+        });
+
+       /*]]>*/
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+
+<nav class="nav-color navbar-fixed">
+
+    <div class="nav-wrapper">
+
+        <div class="row">
+
+            <div class="col s2">
+                <ul class="left">
+                    <li><a href="#">Perp</a></li>
+                </ul>
+            </div>
+
+            <div class="col s4">
+                <form class="search-input" id = "search-form" th:action="@{/find_products_by_query}" method="POST">
+                    <div class="input-field">
+                        <input id="search" type="search" placeholder="Поиск товара" name = "userQuery"/>
+                        <label for="search"><i class="material-icons left">search</i></label>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="col s3">
+                <button type = "submit" form = "search-form" class="btn">
+                    Найти
+                </button>
+            </div>
+
+
+            <div class="col s3">
+
+                <ul class="right">
+                    <a th:href="@{/index}">Главная страница</a>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="centerized">
+
+    <h5 class="black-text text-lighten-3 center-align"
+        th:text="'Товаров в корзине: ' +
+            ${products_count != null and products_count &gt; 0 ? products_count : '0'}"></h5>
+
+    <p class="center-align">
+        <a class="waves-effect waves-light btn red" th:href="@{/user/busket}">
+            <i class="material-icons right">shopping_cart</i>
+            Перейти в корзину
+        </a>
+    </p>
+
+    <br/>
+
+    <p class = "center-align">
+
+       <form th:action="@{/find_products_by_price_range}" method="POST">
+
+            <div id = "range-slider"></div>
+
+            <input type = "hidden" id = "start" name = "start"/>
+            <input type = "hidden" id = "end" name = "end"/>
+
+            <button type = "submit" class = "btn">Найти товары</button>
+
+       </form>
+
+    </p>
+
+</div>
+
+<div class="product">
+
+    <div class="row">
+
+        <div class="col s12 m4 l4" th:each="product : ${products}">
+
+            <form th:action="@{/user/catalog}" method="POST">
+
+                <input type="hidden" name="productId" th:value="${product.id}"/>
+
+                <br/>
+                <h6 class="black-text text-lighten-3 center-align" th:text="${product.title}"></h6>
+                <br/>
+                <div class="centerized">
+                    <img style="display: inline-block;" class="materialboxed" width="200px" height="200px"
+                         th:src="${product.photoLink}"
+                         th:attr="data-caption=${product.description}"/>
+                </div>
+                <br/>
+                <h6 class="black-text text-lighten-3 center-align" th:text="'Цена : ' + ${product.price} + ' Р'"></h6>
+                <p class="center-align">
+                    <button class="btn waves-effect waves-light" type="submit">Добавить в корзину
+                        <i class="material-icons right">send</i>
+                    </button>
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <ul class="pagination" th:if="${page ne null}">
+
+        <li th:class="${page.pageNumber - 6 > 0} ? 'waves-effect' : 'disabled'">
+            <a th:href="@{/catalog_page(pageLimit = 6, pageOffset = page.pageNumber - 6)}">
+                <i class="material-icons">chevron_left</i>
+            </a>
+        </li>
+
+        <li th:each="i : ${#numbers.sequence(0, limit, 6)}"
+            th:class="${page.pageNumber == i} ? 'active' : 'waves-effect'"
+            th:inline="text">
+
+            <a th:href="@{/catalog_page(pageLimit = 6, pageOffset = i)}" th:text="${i}"></a>
+
+        </li>
+
+        <li th:class="${page.pageNumber + 6 > limit} ? 'waves-effect' : 'disabled'">
+            <a th:href="@{/catalog_page(pageLimit = 6, pageOffset = page.pageNumber + 6)}">
+                <i class="material-icons">chevron_right</i>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/materialize.min.js}"></script>
+<script th:src="@{/js/send_form.js}"></script>
+</body>
+
+</html>

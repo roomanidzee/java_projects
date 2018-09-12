@@ -1,0 +1,27 @@
+.nav-color{
+    background-color: #0D47A1 !important;
+}
+
+.product{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    position: relative;
+}
+
+.centerized { text-align: center }
+
+input[id="search"] {
+    height: 45px !important;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.search-input{
+    background-color: #82b1ff ;
+    height: 45px !important;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+nav .input-field label {
+    top: -8px;
+    left: 0;
+}

@@ -1,0 +1,22 @@
+.nav-color{
+    background-color: #0f9d58 !important;
+}
+
+.forms{
+    padding-top: 5%;
+    padding-bottom: 8%;
+    position: relative;
+}
+
+.center-form{
+    vertical-align: middle;
+}
+
+.icon_style{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    cursor:pointer;
+}

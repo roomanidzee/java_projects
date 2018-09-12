@@ -1,0 +1,9 @@
+head
+    title #{title}
+
+h1 Список файлов сервиса
+br
+ul
+    each file in files
+        li
+           a(href = file) #{file}
