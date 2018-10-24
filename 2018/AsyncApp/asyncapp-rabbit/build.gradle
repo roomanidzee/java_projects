@@ -1,0 +1,68 @@
+buildscript{
+    ext{
+        springBootVersion = '2.0.5.RELEASE'
+        springDependencyManagementPlugin = '1.0.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyManagementPlugin}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+ext.springCloudVersion = 'Finchley.RELEASE'
+ext.lombokVersion = '1.18.2'
+ext.jacksonVersion = '2.9.6'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
+    }
+}
+
+group 'com.romanidze'
+version '1.0'
+
+bootJar{
+    mainClassName = 'com.romanidze.asyncapprabbitmain.application.Application'
+    baseName = 'async-app-rabbit-main'
+}
+
+bootRun {
+    main = 'com.romanidze.asyncapprabbitmain.application.Application'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-amqp")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework.boot:spring-boot-starter-reactor-netty")
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-ribbon")
+
+    compile("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
+    compile("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
+    compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
+}

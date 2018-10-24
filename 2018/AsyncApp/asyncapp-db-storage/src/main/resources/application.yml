@@ -1,0 +1,52 @@
+spring:
+
+  application:
+    name: db_service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://environment-postgres:5432/docker-db
+    username: asyncapp-user
+    password: asyncpass
+
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+    hibernate:
+      ddl-auto: update
+      
+    show-sql: true
+
+  jta:
+    enabled: true
+
+server:
+  port: 0
+
+jwt:
+  secret: fnvaoiuerhtip3qu4htq3u5thqp9384uq5q49jfmdskvna
+  header: Authorization
+
+eureka:
+
+  client:
+    serviceUrl:
+      defaultZone: http://asyncapp-eureka:9000/eureka
+
+  instance:
+    prefer-ip-address: true
+    hostname: asyncapp-eureka
+
+microservices:
+
+  redis-service:
+    base: http://api/v1/redis_service
+    paths:
+      get_banned_users: /persons/all
+      get_by_username: /persons
+      ban_user: /persons/add_person

@@ -1,0 +1,78 @@
+buildscript{
+    ext{
+        springBootVersion = '2.0.5.RELEASE'
+        springDependencyManagementPlugin = '1.0.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyManagementPlugin}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+ext.springCloudVersion = 'Finchley.RELEASE'
+ext.lombokVersion = '1.18.2'
+ext.postgresqlVersion = '42.2.5'
+ext.springFoxVersion = '2.9.2'
+ext.jwtTokenVersion = '0.9.1'
+ext.jacksonVersion = '2.9.6'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
+    }
+}
+
+group 'com.romanidze'
+version '1.0'
+
+bootJar{
+    mainClassName = 'com.romanidze.asyncappdbstorage.application.Application'
+    baseName = 'async-app-db-storage'
+}
+
+bootRun {
+    main = 'com.romanidze.asyncappdbstorage.application.Application'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+    compile("io.springfox:springfox-swagger2:${springFoxVersion}")
+    compile("io.springfox:springfox-swagger-ui:${springFoxVersion}")
+
+    compile("org.postgresql:postgresql:${postgresqlVersion}")
+    compile("io.jsonwebtoken:jjwt:${jwtTokenVersion}")
+
+    compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+    compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+
+    compile("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+}

@@ -9,4 +9,10 @@ target/
 *.war
 *.ear
 
+.idea
+.gradle
+out
+build
+node_modules
+
 

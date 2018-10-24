@@ -1,0 +1,30 @@
+zuul:
+
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 10000  
+
+  prefix: /api/v1
+
+  routes:
+
+    db_service:
+      path: /db_service/**
+      serviceId: db_service
+
+    cat_service:
+      path: /cat_service/**
+      serviceId: cat_service
+
+    rabbit_service:
+      path: /rabbit_service/**
+      serviceId: rabbit_service
+
+    redis_service:
+      path: /redis_service/**
+      serviceId: redis_service
+
+ribbon:
+  
+  ReadTimeout: 10000
+  ConnectTimeout: 10000        

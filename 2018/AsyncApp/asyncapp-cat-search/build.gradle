@@ -1,0 +1,62 @@
+buildscript{
+    ext{
+        springBootVersion = '2.0.5.RELEASE'
+        springDependencyManagementPlugin = '1.0.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyManagementPlugin}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+ext.springCloudVersion = 'Finchley.RELEASE'
+ext.lombokVersion = '1.18.2'
+ext.springFoxVersion = '2.9.2'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
+    }
+}
+
+group 'com.romanidze'
+version '1.0'
+
+bootJar{
+    mainClassName = 'com.romanidze.asyncappcatsearch.application.Application'
+    baseName = 'async-app-cat-search'
+}
+
+bootRun {
+    main = 'com.romanidze.asyncappcatsearch.application.Application'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+    compile("io.springfox:springfox-swagger2:${springFoxVersion}")
+    compile("io.springfox:springfox-swagger-ui:${springFoxVersion}")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+}

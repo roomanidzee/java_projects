@@ -1,0 +1,63 @@
+spring:
+
+  application:
+    name: rabbit_service
+
+  rabbitmq:
+    host: environment-rabbit
+    username: api-user
+    password: qwerty008
+
+server:
+  port: 0
+
+eureka:
+
+  client:
+    serviceUrl: 
+      defaultZone: http://asyncapp-eureka:9000/eureka
+
+  instance:
+    prefer-ip-address: true
+    hostname: asyncapp-eureka
+
+rabbit-services:
+
+  exchange:
+    user: async-exchange
+    cat: async-exchange
+
+  registration:
+    queue_name: registration-queue
+    binding: save-user
+
+  cat_to_user:
+    queue_name: cat-to-user-queue
+    binding: cat-to-user
+
+  cat_search:
+    queue_name: cat-search-queue
+    binding: cat-search
+
+microservices:
+
+  db-service:
+    base: http://api/v1/db_service/users
+    paths:
+      register: /register_user
+      add_image_to_user: /add_image_to_user
+      get_users: /get_users
+      get_user: /user/
+      add_cat_image: /add_cat
+
+  cat-service:
+    base: http://api/v1/cat_service
+    paths:
+      search: /cats/search
+
+  redis-service:
+    base: http://api/v1/redis_service
+    paths:
+      get_banned_users: /persons/all
+      get_by_username: /persons
+      ban_user: /persons/add_person

@@ -1,0 +1,20 @@
+spring:
+
+  application:
+    name: redis_service
+
+  redis:
+    host: environment-redis
+
+server:
+  port: 0
+
+eureka:
+
+  client:
+    serviceUrl:
+     defaultZone: http://asyncapp-eureka:9000/eureka
+     hostname: asyncapp-eureka
+
+  instance:
+    prefer-ip-address: true

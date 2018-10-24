@@ -1,0 +1,32 @@
+microservices:
+
+  base_url: http://asyncapp-zuul:8082/api/v1
+
+  rabbit_service:
+
+    registration: /rabbit_service/user/register
+
+    user_with_cat: /rabbit_service/user/add_image_to_user
+
+    websockets:
+
+      base_url: /rabbit_service/users_with_cats
+
+      cat_search:
+
+        request_url: /app/search_cat_for_user
+        response_url: /topic/search_cat_for_user
+
+  db_service:
+
+    login: /db_service/users/login
+
+    get_users: /db_service/users/get_users
+
+    add_cat: /db_service/add_cat
+
+  cat_service:
+
+    search_cat: /cat_service/cats/search
+
+

@@ -1,0 +1,166 @@
+version: '3'
+
+services:
+
+    environment-rabbit:
+
+        image: 'romanidze/environment-rabbit:latest'
+
+        build:
+            context: environment-rabbit
+            dockerfile: Dockerfile
+
+        hostname: docker-node.rabbit
+
+        ports:
+            - '4369:4369'
+            - '5672:5672'
+            - '15672:15672'
+            - '25672:25672'
+            - '35197:35197'
+
+        volumes:
+            - "./local-rabbit/data:/var/lib/rabbitmq"
+            - "./local-rabbit/data/logs:/var/log/rabbitmq"
+
+        container_name: environment-rabbit
+
+    environment-postgres:
+
+        image: 'romanidze/environment-postgres:latest'
+
+        build:
+            context: environment-postgres
+            dockerfile: Dockerfile
+
+        ports:
+            - '5432:5432'
+
+        volumes:
+            - "./local-postgres:/var/lib/postgresql/data"
+
+        container_name: environment-postgres
+
+    environment-redis:
+    
+        image: 'romanidze/environment-redis:latest'
+
+        build:
+            context: environment-redis
+            dockerfile: Dockerfile
+
+        ports:
+            - '6379:6379' 
+
+        container_name: environment-redis        
+
+    asyncapp-react:
+
+        image: 'romanidze/asyncapp-react:latest'
+
+        depends_on:
+            - environment-rabbit
+            - environment-postgres
+            - environment-redis
+
+        build:
+            context: asyncapp-react
+            dockerfile: Dockerfile
+
+        ports:
+            - '5000:5000'
+
+        container_name: asyncapp-react
+
+    asyncapp-eureka:
+
+        image: 'romanidze/asyncapp-eureka:latest'
+
+        depends_on: 
+            - environment-rabbit
+            - environment-postgres
+            - environment-redis
+
+        build:
+            context: asyncapp-eureka
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-eureka    
+
+    asyncapp-zuul:
+
+        image: 'romanidze/asyncapp-zuul:latest'
+
+        depends_on: 
+            - asyncapp-eureka
+
+        build:
+            context: asyncapp-zuul
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-zuul
+
+    asyncapp-cat-search:
+
+        image: 'romanidze/asyncapp-cat-search:latest'
+
+        links: 
+            - asyncapp-eureka
+            - asyncapp-zuul
+
+        build:
+            context: asyncapp-cat-search
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-cat-search
+
+    asyncapp-db-storage:
+
+        image: 'romanidze/asyncapp-db-storage:latest'
+
+        depends_on: 
+            - asyncapp-cat-search
+
+        links: 
+            - asyncapp-eureka
+            - asyncapp-zuul
+
+        build:
+            context: asyncapp-db-storage
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-db-storage
+        
+    asyncapp-rabbit:
+
+        image: 'romanidze/asyncapp-rabbit:latest'
+
+        depends_on: 
+            - asyncapp-db-storage
+
+        links: 
+            - asyncapp-eureka
+            - asyncapp-zuul 
+
+        build:
+            context: asyncapp-rabbit
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-rabbit
+
+    asyncapp-redis:
+
+        image: 'romanidze/asyncapp-redis:latest'
+
+        depends_on:
+            - asyncapp-rabbit
+
+        links: 
+            - asyncapp-eureka
+            - asyncapp-zuul
+
+        build:
+            context: asyncapp-redis
+            dockerfile: Dockerfile
+
+        container_name: asyncapp-redis                                   
