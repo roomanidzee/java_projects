@@ -1,0 +1,19 @@
+spring:
+
+  rabbitmq:
+
+    host: environment-rabbit
+    port: 5672
+    username: api-user
+    password: qwerty008
+
+mongo-service:
+
+  url: reactivecontracts-mongo:8081/contracts
+
+rabbit-service:
+
+  queue-name: receive-contracts
+
+server:
+  port: 8083  

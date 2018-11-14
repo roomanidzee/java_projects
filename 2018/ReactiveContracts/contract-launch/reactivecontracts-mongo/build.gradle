@@ -1,0 +1,47 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.romanidze'
+version '1.0'
+
+bootJar{
+    mainClassName = 'com.romanidze.reactivecontractsmongo.application.Application'
+    baseName = 'reactivecontracts-mongo'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.lombokVersion = '1.18.2'
+ext.jacksonVersion = '2.9.7'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+    compile("org.springframework.boot:spring-boot-starter-webflux")
+
+    compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+    compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
+}

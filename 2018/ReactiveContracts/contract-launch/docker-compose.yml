@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+
+    environment-mongo:
+        
+        image: 'romanidze/environment-mongo:latest' 
+
+        build:
+
+            context: environment-mongo
+            dockerfile: Dockerfile
+
+        ports:
+            - '27017:27017'
+
+        environment:
+            - MONGODB_ADMIN_USER=admin
+            - MONGODB_ADMIN_PASS=adminpass
+            - MONGODB_APPLICATION_DATABASE=reactive_contracts_db
+            - MONGODB_APPLICATION_USER=reactive_user
+            - MONGODB_APPLICATION_PASS=reactive_pass
+
+        volumes:
+            
+            - ${PWD}/volume-mongo/data/db:/data/db
+            - ${PWD}/volume-mongo/data/bkp:/data/bkp
+        
+    environment-redis:
+    
+        image: 'romanidze/environment-redis:latest'
+
+        build:
+
+            context: environment-redis
+            dockerfile: Dockerfile
+
+        ports:
+            - '6379:6379'
+
+
+    environment-rabbit:
+
+        image: 'romanidze/environment-rabbit:latest'
+
+        build:
+            context: environment-rabbit
+            dockerfile: Dockerfile
+
+        hostname: docker-node.rabbit
+
+        ports:
+            - '5672:5672'
+
+        volumes:
+            - ${PWD}/local-rabbit/data:/var/lib/rabbitmq
+            - ${PWD}/local-rabbit/data/logs:/var/log/rabbitmq   
+
+    reactivecontracts-rabbit:
+    
+        image: 'romanidze/reactivecontracts-rabbit:latest'
+
+        depends_on:
+            - environment-rabbit
+
+        build:
+        
+            context: reactivecontracts-rabbit
+            dockerfile: Dockerfile
+
+        ports:
+            - '8083:8083'             
+        
+    reactivecontracts-mongo:
+    
+        image: 'romanidze/reactivecontracts-mongo:latest'
+
+        depends_on:
+            - environment-mongo
+
+        build:
+            
+            context: reactivecontracts-mongo
+            dockerfile: Dockerfile
+
+        ports:
+            - '8081:8081'
+        
+    reactivecontracts-redis:
+    
+        image: 'romanidze/reactivecontracts-redis:latest'
+
+        depends_on:
+            - environment-redis
+
+        build:
+            
+            context: reactivecontracts-redis
+            dockerfile: Dockerfile
+
+        ports:
+            - '8082:8082'            

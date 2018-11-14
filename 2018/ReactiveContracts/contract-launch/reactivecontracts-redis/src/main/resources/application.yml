@@ -1,0 +1,8 @@
+spring:
+
+  redis:
+
+    host: environment-redis
+
+server:
+  port: 8082

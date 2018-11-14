@@ -1,0 +1,21 @@
+{
+  "name": "contract-rancher",
+  "version": "0.0.1",
+  "description": "Работа с docker-compose с помощью REST API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Андрей Романов",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.6",
+    "os-utils": "0.0.14",
+    "pug": "^2.0.3"
+  }
+}
