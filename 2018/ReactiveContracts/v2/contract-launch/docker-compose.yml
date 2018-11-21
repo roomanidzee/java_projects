@@ -1,0 +1,122 @@
+version: '2.4'
+
+services:
+
+    environment-mongo:
+        
+        image: 'romanidze/environment-mongo:latest' 
+
+        build:
+
+            context: environment-mongo
+            dockerfile: Dockerfile
+
+        ports:
+            - '27017:27017'
+
+        environment:
+            - MONGODB_ADMIN_USER=admin
+            - MONGODB_ADMIN_PASS=adminpass
+            - MONGODB_APPLICATION_DATABASE=reactive_contracts_db
+            - MONGODB_APPLICATION_USER=reactive_user
+            - MONGODB_APPLICATION_PASS=reactive_pass
+
+        volumes:
+            
+            - './volume-mongo/data/db:/data/db'
+            - './volume-mongo/data/bkp:/data/bkp'
+
+        container_name: environment-mongo
+        mem_limit: 1024m  
+
+
+    environment-rabbit:
+
+        image: 'romanidze/environment-rabbit:latest'
+
+        build:
+            context: environment-rabbit
+            dockerfile: Dockerfile
+
+        hostname: docker-node.rabbit
+
+        ports:
+            - '5672:5672'
+
+        volumes:
+            - './local-rabbit/data:/var/lib/rabbitmq'
+            - './local-rabbit/data/logs:/var/log/rabbitmq'
+
+        container_name: environment-rabbit
+        mem_limit: 256m   
+
+    environment-tarantool:
+
+        image: 'romanidze/environment-tarantool:latest'
+
+        build:
+            context: environment-tarantool
+            dockerfile: Dockerfile
+
+        ports:
+            - '3301:3301'
+
+        container_name: environment-tarantool
+        mem_limit: 512m               
+
+    reactivecontracts-rabbit:
+    
+        image: 'romanidze/reactivecontracts-rabbit:latest'
+
+        depends_on:
+            - environment-rabbit
+
+        build:
+        
+            context: reactivecontracts-rabbit
+            dockerfile: Dockerfile
+
+        ports:
+            - '8083:8083'
+
+        container_name: reactivecontracts-rabbit
+        mem_limit: 512m                
+        
+    reactivecontracts-mongo:
+    
+        image: 'romanidze/reactivecontracts-mongo:latest'
+
+        depends_on:
+            - environment-mongo
+
+        build:
+            
+            context: reactivecontracts-mongo
+            dockerfile: Dockerfile
+
+        ports:
+            - '8081:8081'
+
+        container_name: reactivecontracts-mongo
+        mem_limit: 512m    
+        
+    reactivecontracts-tarantool:
+    
+        image: 'romanidze/reactivecontracts-tarantool:latest'
+
+        depends_on:
+            - reactivecontracts-mongo
+
+        build:
+            
+            context: reactivecontracts-tarantool
+            dockerfile: Dockerfile
+
+        ports:
+            - '8086:8086'
+
+        links:
+            - environment-tarantool    
+
+        container_name: reactivecontracts-tarantool
+        mem_limit: 512m             

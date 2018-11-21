@@ -1,0 +1,10 @@
+tarantool:
+
+  host: 127.0.0.1
+  port: 3301
+  spaceID: 512
+  username: contract-user
+  password: secret
+
+server:
+  port: 8086

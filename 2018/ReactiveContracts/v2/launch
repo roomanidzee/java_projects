@@ -1,0 +1,4 @@
+docker run \
+  --name contract-app \
+  -d -p 3301:3301 \
+  tarantool/tarantool:2
