@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+
+  reactive:
+
+    postgresql:
+
+      host: localhost
+      port: 5432
+      database: reactivchina_db
+      username: reactivchina_user
+      password: reactivchina_pass

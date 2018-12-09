@@ -1,0 +1,36 @@
+{
+  "groups": [
+    {
+       "name": "spring.reactive.postgresql",
+       "type": "com.romanidze.reactivchina.config.psql.DatabaseProperties",
+       "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.reactive.postgresql.host",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    },
+    {
+      "name": "spring.reactive.postgresql.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    },
+    {
+      "name": "spring.reactive.postgresql.database",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    },
+    {
+      "name": "spring.reactive.postgresql.username",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    },
+    {
+      "name": "spring.reactive.postgresql.password",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchina.config.psql.DatabaseProperties"
+    }
+  ]
+}
